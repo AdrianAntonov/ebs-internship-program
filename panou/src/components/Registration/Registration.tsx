@@ -9,6 +9,7 @@ function Registration() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [checked, setChecked] = useState(false);
+  // const [data, setData] = useState(null);
 
   const handleChange = (e: any) => {
     e.preventDefault();
@@ -43,17 +44,19 @@ function Registration() {
     setFirstName("");
   };
 
-  const checkboxChanger = () => {
+  const toggleCheckbox = () => {
     setChecked((prev) => (prev = !prev));
   };
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Password not confirmed");
       return;
     }
+
     addingUser({ firstName, lastName, email, password, checked });
-    checkboxChanger();
+    toggleCheckbox();
     reset();
   };
 
@@ -120,7 +123,7 @@ function Registration() {
             name="checkbox"
             type="checkbox"
             checked={checked}
-            onChange={checkboxChanger}
+            onChange={toggleCheckbox}
             required
           />
           <span className={styles.agreement}>
@@ -128,6 +131,7 @@ function Registration() {
           </span>
         </label>
         <button type="submit">Submit</button>
+        {/* <button onClick={checkUser}>Submit</button> */}
       </form>
     </div>
   );
