@@ -1,0 +1,139 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "name": "Satheesh",
+      "email": "Sat@mail.com",
+      "adderss": "South street"
+    },
+    {
+      "id": 2,
+      "name": "John",
+      "email": "john@mail.com",
+      "adderss": "North street"
+    },
+    {
+      "id": 3,
+      "name": "Robert",
+      "email": "robert@mail.com",
+      "adderss": "East street"
+    },
+    {
+      "id": 4,
+      "name": "Mani",
+      "email": "mani@mail.com",
+      "adderss": "West street"
+    },
+    {
+      "firstName": "asd",
+      "lastName": "qwe",
+      "email": "asd@mail.com",
+      "password": "qwe",
+      "confirmPassword": "qwe",
+      "id": 5
+    },
+    {
+      "firstName": "qwe",
+      "lastName": "ewq",
+      "email": "qew\"mail.com",
+      "password": "qas",
+      "confirmPassword": "qas",
+      "id": 6
+    },
+    {
+      "firstName": "qrqrq",
+      "lastName": "rqrqrrr",
+      "email": "rrrr@ssdd.com",
+      "password": "qwe",
+      "confirmPassword": "qwe",
+      "id": 7
+    },
+    {
+      "firstName": "erere",
+      "lastName": "ereeee",
+      "email": "rrww@hh.mail",
+      "confirmPassword": "",
+      "id": 8
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 9
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 10
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 11
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 12
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 13
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 14
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 15
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 16
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 17
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "confirmPassword": "",
+      "id": 18
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

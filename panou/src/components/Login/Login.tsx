@@ -1,15 +1,26 @@
+import styles from "./Login.module.css";
+
 function Login() {
   return (
-    <div>
-      <form>
-        <div>
-          <input placeholder="email" type="text" />
-        </div>
-        <div>
-          <input placeholder="password" type="password" />
-        </div>
-      </form>
-    </div>
+    <form className={styles.formular}>
+      <input
+        // onChange={handleChange}
+        name="email"
+        placeholder="Email"
+        type="email"
+        // value={email}
+        required
+      />
+      <input
+        // onChange={handleChange}
+        name="password"
+        placeholder="Password"
+        type="password"
+        // value={password}
+        required
+      />
+      <button type="submit">Log in</button>
+    </form>
   );
 }
 
