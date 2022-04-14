@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { addingUser } from "../../services/users";
 import styles from "./Registration.module.css";
 
@@ -8,10 +8,12 @@ function Registration() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [checked, setChecked] = useState(false);
-  // const [data, setData] = useState(null);
+  const [agreement, setAgreement] = useState(false);
+  const [gender, setGender] = useState("");
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+  ) => {
     e.preventDefault();
 
     const { name, value } = e.target;
@@ -31,10 +33,24 @@ function Registration() {
         break;
       case "confirmPassword":
         setConfirmPassword(value);
+        break;
+      case "gender":
+        setGender(value);
+        break;
+      default:
+        return;
     }
   };
 
   const standard = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
+  const verifyInputs =
+    !firstName ||
+    !lastName ||
+    !email ||
+    !password ||
+    !confirmPassword ||
+    !gender ||
+    !agreement;
 
   const reset = () => {
     setConfirmPassword("");
@@ -45,17 +61,16 @@ function Registration() {
   };
 
   const toggleCheckbox = () => {
-    setChecked((prev) => (prev = !prev));
+    setAgreement((prev) => (prev = !prev));
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert("Password not confirmed");
       return;
     }
-
-    addingUser({ firstName, lastName, email, password, checked });
+    addingUser({ firstName, lastName, email, password, agreement, gender });
     toggleCheckbox();
     reset();
   };
@@ -71,7 +86,6 @@ function Registration() {
           pattern={standard}
           value={firstName}
           id="firstName"
-          required
         />
         <input
           onChange={handleChange}
@@ -80,7 +94,6 @@ function Registration() {
           type="text"
           pattern={standard}
           value={lastName}
-          required
         />
         <input
           onChange={handleChange}
@@ -88,7 +101,6 @@ function Registration() {
           placeholder="Email"
           type="email"
           value={email}
-          required
         />
         <input
           onChange={handleChange}
@@ -96,7 +108,6 @@ function Registration() {
           placeholder="Password"
           type="password"
           value={password}
-          required
         />
         <input
           onChange={handleChange}
@@ -104,34 +115,33 @@ function Registration() {
           placeholder="Confirm password"
           type="password"
           value={confirmPassword}
-          required
         />
         <select
           className={styles.selector}
           onChange={handleChange}
           name="gender"
-          required
+          value={gender}
         >
           <option value="">Gender</option>
           <option value="Masculin">Masculin</option>
           <option value="Feminin">Feminin</option>
           <option value="Ma abtin">Ma abtin</option>
         </select>
-        <label htmlFor="checkbox" className={styles.label}>
+        <label htmlFor="agreement" className={styles.label}>
           <input
-            className={styles.confirmation}
-            name="checkbox"
+            // className={styles.confirmation}
+            name="agreement"
             type="checkbox"
-            checked={checked}
+            checked={agreement}
             onChange={toggleCheckbox}
-            required
           />
           <span className={styles.agreement}>
             I agree with the processing of personal data
           </span>
         </label>
-        <button type="submit">Submit</button>
-        {/* <button onClick={checkUser}>Submit</button> */}
+        <button disabled={verifyInputs} type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

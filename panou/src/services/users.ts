@@ -24,7 +24,12 @@ export const checkUser = async (email: string, password: string) => {
   const { data } = await axios.get(
     `/users?email=${email}&password=${password}`
   );
-  // console.log(data);
+  console.log(data);
+  return data;
+};
+
+export const getUserByID = async (id: number) => {
+  const { data } = await axios.get(`/users/${id}`);
   return data;
 };
 
@@ -40,6 +45,7 @@ const fetching = {
   getUsers,
   addingUser,
   deleteUser,
+  getUserByID,
   // unspsh,
 };
 

@@ -8,79 +8,13 @@
       "password": "South street"
     },
     {
-      "firstName": "qweeee",
-      "lastName": "eeewwqq",
-      "email": "qw@mm.com",
-      "password": "qqqq",
+      "firstName": "woo",
+      "lastName": "boo",
+      "email": "w@boo.com",
+      "password": "123",
+      "agreement": true,
+      "gender": "Masculin",
       "id": 2
-    },
-    {
-      "firstName": "asd",
-      "lastName": "dsa",
-      "email": "asd@ma.com",
-      "password": "qaqa",
-      "id": 3
-    },
-    {
-      "firstName": "qqqqq",
-      "lastName": "wwwwwwww",
-      "email": "wqe@qwe",
-      "password": "dddd",
-      "id": 4
-    },
-    {
-      "firstName": "xcv",
-      "lastName": "vcx",
-      "email": "vcx@mm.com",
-      "password": "123",
-      "id": 5
-    },
-    {
-      "firstName": "qweeee",
-      "lastName": "eeewwqq",
-      "email": "duruf@mail.com",
-      "password": "wer",
-      "id": 6
-    },
-    {
-      "firstName": "qqq",
-      "lastName": "wer",
-      "email": "qw@mm.com",
-      "password": "123",
-      "checked": true,
-      "id": 7
-    },
-    {
-      "firstName": "qqq",
-      "lastName": "wer",
-      "email": "wqe@qwe",
-      "password": "321",
-      "checked": true,
-      "id": 8
-    },
-    {
-      "firstName": "qqq",
-      "lastName": "wer",
-      "email": "duruf@mail.com",
-      "password": "321",
-      "checked": true,
-      "id": 9
-    },
-    {
-      "firstName": "qqq",
-      "lastName": "wer",
-      "email": "duruf@mail.com",
-      "password": "321",
-      "checked": true,
-      "id": 10
-    },
-    {
-      "firstName": "ert",
-      "lastName": "tre",
-      "email": "tre@mail.com",
-      "password": "123",
-      "checked": true,
-      "id": 11
     }
   ],
   "posts": [

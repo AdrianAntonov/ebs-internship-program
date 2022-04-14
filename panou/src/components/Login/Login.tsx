@@ -1,13 +1,17 @@
 import styles from "./Login.module.css";
 import { checkUser } from "../../services/users";
-import { useState } from "react";
+import { useContext, useState, ChangeEvent } from "react";
+import context from "../../context/app-context";
 
 function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(null);
 
-  const handleChange = (e: any) => {
+  const userContext = useContext(context);
+  console.log(userContext);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const { name, value } = e.target;
@@ -21,8 +25,7 @@ function Login() {
         break;
     }
   };
-  // console.log(email);
-  // console.log(password);
+
   const reset = () => {
     setEmail("");
     setPassword("");
@@ -37,7 +40,9 @@ function Login() {
         /////////// Redirectionam spre pagina de Inregistrare//////////
         return;
       }
+      console.log(res[0].id);
       setUser(res);
+      window.localStorage.setItem("userID", JSON.stringify(res[0].id));
       ///////////// Directionam spre pagina Utilizatorului/////////////
       reset();
     });
