@@ -15,6 +15,24 @@
       "agreement": true,
       "gender": "Masculin",
       "id": 2
+    },
+    {
+      "firstName": "zasa",
+      "lastName": "sad",
+      "email": "sa@mail.com",
+      "password": "123",
+      "agreement": true,
+      "gender": "Feminin",
+      "id": 3
+    },
+    {
+      "firstName": "mango",
+      "lastName": "gongo",
+      "email": "mago@mail.com",
+      "password": "123321",
+      "agreement": true,
+      "gender": "Masculin",
+      "id": 4
     }
   ],
   "posts": [

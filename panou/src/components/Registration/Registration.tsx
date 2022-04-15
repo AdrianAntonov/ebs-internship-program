@@ -1,6 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { addingUser } from "../../services/users";
 import styles from "./Registration.module.css";
+import { useContext } from "react";
+import context from "../../context/app-context";
 
 function Registration() {
   const [firstName, setFirstName] = useState("");
@@ -10,6 +12,9 @@ function Registration() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [gender, setGender] = useState("");
+
+  const userContext = useContext(context);
+  console.log(userContext);
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
@@ -78,6 +83,7 @@ function Registration() {
   return (
     <div>
       <form className={styles.formular} onSubmit={handleSubmit}>
+        <h3>Sign Up</h3>
         <input
           onChange={handleChange}
           name="firstName"

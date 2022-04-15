@@ -29,6 +29,9 @@ export const checkUser = async (email: string, password: string) => {
 };
 
 export const getUserByID = async (id: number) => {
+  if (id === undefined || null) {
+    return {};
+  }
   const { data } = await axios.get(`/users/${id}`);
   return data;
 };
