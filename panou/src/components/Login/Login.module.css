@@ -1,9 +1,11 @@
 .formular {
   width: 320px;
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-40%, -110%);
+  transform: translate(-50%, -50%);
+  margin-top: auto; */
+  /* margin-top: 20px; */
 }
 
 input,
