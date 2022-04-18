@@ -6,9 +6,11 @@ import AppNav from "../AppNav/AppNav";
 import context from "../../../context/app-context";
 
 function NavBar() {
-  const { user, setUser } = useContext(context);
+  const { user } = useContext(context);
 
   // console.log(user.agreement);
+  // const getLocal = window.localStorage.length > 0;
+  // console.log(getLocal);
 
   return (
     <nav className={styles.navigation}>

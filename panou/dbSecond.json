@@ -33,6 +33,42 @@
       "agreement": true,
       "gender": "Masculin",
       "id": 4
+    },
+    {
+      "firstName": "gugu",
+      "lastName": "zuzu",
+      "email": "zuzu@mail.com",
+      "password": "43211234",
+      "agreement": true,
+      "gender": "Masculin",
+      "id": 5
+    },
+    {
+      "firstName": "mamba",
+      "lastName": "gamba",
+      "email": "mag@mail.com",
+      "password": "mama",
+      "agreement": true,
+      "gender": "Feminin",
+      "id": 6
+    },
+    {
+      "firstName": "lala",
+      "lastName": "jaja",
+      "email": "ja@mail.com",
+      "password": "jajaja",
+      "agreement": true,
+      "gender": "Feminin",
+      "id": 7
+    },
+    {
+      "firstName": "mumu",
+      "lastName": "meme",
+      "email": "mu@mail",
+      "password": "1234",
+      "agreement": true,
+      "gender": "Masculin",
+      "id": 8
     }
   ],
   "posts": [

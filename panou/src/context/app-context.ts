@@ -25,6 +25,7 @@ export const initialState = {
   gender: "",
   agreement: false,
 };
+
 const appContext = createContext<IsetUser>({
   user: initialState,
   setUser: () => null,

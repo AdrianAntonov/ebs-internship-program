@@ -4,7 +4,7 @@ import context from "../../context/app-context";
 import { getUserByID } from "../../services/users";
 import styles from "./HomePage.module.css";
 
-function PaginaPrincipala() {
+function HomePage() {
   const { user, setUser } = useContext(context);
 
   useEffect(() => {
@@ -20,6 +20,8 @@ function PaginaPrincipala() {
         });
   }, [setUser]);
 
+  console.log(user);
+
   return (
     <div className={styles.welcome}>
       <h2>WELCOME !</h2>
@@ -27,4 +29,4 @@ function PaginaPrincipala() {
   );
 }
 
-export default PaginaPrincipala;
+export default HomePage;

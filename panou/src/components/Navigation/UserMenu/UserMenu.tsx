@@ -15,7 +15,6 @@ function UserMenu() {
       agreement: false,
     });
   };
-
   return (
     <div className={styles.name}>
       <span>{user.firstName}</span>

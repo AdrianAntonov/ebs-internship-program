@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 import { checkUser } from "../../services/users";
-// import { useState, ChangeEvent } from "react";
+import { Navigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import { useContext, useState, ChangeEvent } from "react";
 import context from "../../context/app-context";
@@ -8,9 +8,7 @@ import context from "../../context/app-context";
 function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [localUser, setLocalUser] = useState(null);
   const [modal, setModal] = useState(true);
-
   const { user, setUser } = useContext(context);
   console.log(user);
 
@@ -40,26 +38,26 @@ function Login() {
 
   const logUser = (e: any) => {
     e.preventDefault();
-    console.log("logUser");
+    // console.log("logUser");
+
     checkUser(email, password).then((res) => {
       if (res.length === 0) {
         alert("Sign up, please!");
         reset();
-        /////////// Redirectionam spre pagina de Inregistrare//////////
         return;
       }
-      console.log(res[0].id);
-      setLocalUser(res);
+
+      // console.log(res[0].id);
       window.localStorage.setItem("userID", JSON.stringify(res[0].id));
+
       setUser(res[0]);
       onClose();
-      ///////////// Directionam spre pagina Utilizatorului/////////////
       reset();
     });
   };
   return (
     <>
-      {modal && (
+      {modal ? (
         <Modal onClose={onClose}>
           <form className={styles.formular}>
             <h3>Log In</h3>
@@ -82,6 +80,11 @@ function Login() {
             </button>
           </form>
         </Modal>
+      ) : (
+        // Redirectionare la localhost3001/ ca sa fie
+        // cu Login-ul dezactivat
+
+        <Navigate to="/" />
       )}
     </>
   );
