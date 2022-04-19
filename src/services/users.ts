@@ -1,4 +1,5 @@
 import axios from "axios";
+import { IaddingUser } from "../type.d/route";
 // const KEY = "mG1lAJOyXhDVeAJwLP7UMfzuWbGksCCZkrr2SH4f0PU";
 // const BASE_URL = "http://localhost:3001";
 
@@ -10,12 +11,12 @@ export const getUsers = async () => {
   return data;
 };
 
-export const addingUser = async (user: any) => {
+export const addingUser = async (user: IaddingUser) => {
   const { data } = await axios.post("/users", user);
   return data;
 };
 
-export const deleteUser = async (userId: string) => {
+export const deleteUser = async (userId: number) => {
   const { data } = await axios.delete(`/users/${userId}`);
   return data;
 };

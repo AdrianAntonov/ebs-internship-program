@@ -1,13 +1,19 @@
 import { useState, ChangeEvent } from "react";
+// import context from "../../../../context/app-context";
+import { addingUser } from "../../../../services/users";
 import styles from "./UserAddingForm.module.css";
 
-function UserAddingForm() {
+interface UserAddingProp {
+  onClose: () => void;
+}
+
+const UserAddingForm = ({ onClose }: UserAddingProp) => {
+  // const {user, setUser}
   const [firstName, setFirstName] = useState("");
   const [lastName, setLasttName] = useState("");
   const [email, setEmail] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [gender, setGender] = useState("");
-  const [modal, setModal] = useState(true);
 
   const standard = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
   const verifyInputs =
@@ -39,7 +45,7 @@ function UserAddingForm() {
   };
 
   const reset = () => {
-    // setGender("");
+    setGender("");
     setEmail("");
     setLasttName("");
     setFirstName("");
@@ -49,20 +55,16 @@ function UserAddingForm() {
     setAgreement((prev) => (prev = !prev));
   };
 
-  const onClose = () => {
-    setModal(!modal);
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // addingUser({
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   agreement,
-    //   gender,
-    // }).then((res) => setUser(res));
+    addingUser({
+      firstName,
+      lastName,
+      email,
+      agreement,
+      gender,
+    }).then((res) => console.log(res));
 
     // checkUser(email, password).then((res) => {
     //   window.localStorage.setItem("userID", JSON.stringify(res[0].id));
@@ -112,6 +114,11 @@ function UserAddingForm() {
           <option value="Feminin">Feminin</option>
           <option value="Ma abtin">Ma abtin</option>
         </select>
+        <select name="status">
+          <option value="">Status</option>
+          <option value="Administrator">Administrator</option>
+          <option value="Moderator">Moderator</option>
+        </select>
         <label htmlFor="agreement" className={styles.label}>
           <input
             // className={styles.confirmation}
@@ -130,6 +137,6 @@ function UserAddingForm() {
       </form>
     </div>
   );
-}
+};
 
 export default UserAddingForm;

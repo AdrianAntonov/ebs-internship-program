@@ -4,17 +4,32 @@ import { getUsers } from "../../../services/users";
 import UserListItem from "./UserListItem";
 import { useContext } from "react";
 import context from "../../../context/app-context";
+import UserAddingForm from "./Form/UserAddingForm";
+import Modal from "../../Modal/Modal";
 
 const Users: React.FC = () => {
+  const [modal, setModal] = useState(false);
+  const [usersList, setUsersList] = useState([]);
+  const [addUser, setAddUser] = useState(false);
   const {
     user: { agreement },
   } = useContext(context);
 
-  const [usersList, setUsersList] = useState([]);
-
   useEffect(() => {
     getUsers().then((res) => setUsersList(res));
-  }, []);
+    console.log("users useEffect");
+  }, [addUser]);
+
+  const onClose = () => {
+    setModal(!modal);
+    setAddUser(!addUser);
+  };
+
+  const handleAddUserButton = () => {
+    onClose();
+  };
+
+  // de CREAT  o functie de DELETE a userului
 
   const showUserList = usersList.map(
     ({ id, firstName, lastName, email, gender }) => (
@@ -32,7 +47,12 @@ const Users: React.FC = () => {
     <>
       {agreement || window.localStorage.length > 0 ? (
         <div>
-          <button>Add a user</button>
+          <button onClick={handleAddUserButton}>Add a user</button>
+          {modal && (
+            <Modal onClose={onClose}>
+              <UserAddingForm onClose={onClose} />
+            </Modal>
+          )}
           <table>
             <thead>
               <tr>
@@ -45,7 +65,6 @@ const Users: React.FC = () => {
             </thead>
             <tbody>{showUserList}</tbody>
           </table>
-          <h4>Users</h4>
         </div>
       ) : (
         <Navigate to="/" />
