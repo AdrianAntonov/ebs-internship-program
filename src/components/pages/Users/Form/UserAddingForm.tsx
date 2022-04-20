@@ -1,19 +1,29 @@
 import { useState, ChangeEvent } from "react";
-// import context from "../../../../context/app-context";
-import { addingUser } from "../../../../services/users";
+import { addingUser, editUser } from "../../../../services/users";
 import styles from "./UserAddingForm.module.css";
+
+// import { useSetState } from "react-use";
 
 interface UserAddingProp {
   onClose: () => void;
+  editId: number;
 }
 
-const UserAddingForm = ({ onClose }: UserAddingProp) => {
-  // const {user, setUser}
+const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLasttName] = useState("");
   const [email, setEmail] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [gender, setGender] = useState("");
+  const [status, setStatus] = useState("");
+  const [fields, setFields] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    agreement: "",
+    gender: "",
+    status: "",
+  });
 
   const standard = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
   const verifyInputs =
@@ -26,22 +36,24 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
 
     const { name, value } = e.target;
 
-    switch (name) {
-      case "firstName":
-        setFirstName(value);
-        break;
-      case "lastName":
-        setLasttName(value);
-        break;
-      case "email":
-        setEmail(value);
-        break;
-      case "gender":
-        setGender(value);
-        break;
-      default:
-        return;
-    }
+    setFields((prevState) => ({ ...prevState, [name]: value }));
+
+    // switch (name) {
+    //   case "firstName":
+    //     setFirstName(value);
+    //     break;
+    //   case "lastName":
+    //     setLasttName(value);
+    //     break;
+    //   case "email":
+    //     setEmail(value);
+    //     break;
+    //   case "gender":
+    //     setGender(value);
+    //     break;
+    //   default:
+    //     return;
+    // }
   };
 
   const reset = () => {
@@ -49,6 +61,7 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
     setEmail("");
     setLasttName("");
     setFirstName("");
+    setStatus("");
   };
 
   const toggleCheckbox = () => {
@@ -58,22 +71,29 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    addingUser({
-      firstName,
-      lastName,
-      email,
-      agreement,
-      gender,
-    }).then((res) => console.log(res));
-
-    // checkUser(email, password).then((res) => {
-    //   window.localStorage.setItem("userID", JSON.stringify(res[0].id));
-    // });
+    editId
+      ? editUser(editId, {
+          firstName,
+          lastName,
+          email,
+          agreement,
+          gender,
+          status,
+        })
+      : addingUser({
+          firstName,
+          lastName,
+          email,
+          agreement,
+          gender,
+          status,
+        });
 
     toggleCheckbox();
     onClose();
     reset();
   };
+
   return (
     <div>
       <form className={styles.formular} onSubmit={handleSubmit}>
@@ -84,8 +104,8 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
           placeholder="First name"
           type="text"
           pattern={standard}
-          value={firstName}
-          id="firstName"
+          value={fields.firstName}
+          autoComplete="off"
         />
         <input
           onChange={handleChange}
@@ -93,35 +113,36 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
           placeholder="Last name"
           type="text"
           pattern={standard}
-          value={lastName}
+          value={fields.lastName}
+          autoComplete="off"
         />
         <input
           onChange={handleChange}
           name="email"
           placeholder="Email"
           type="email"
-          value={email}
+          value={fields.email}
+          autoComplete="off"
         />
 
         <select
           className={styles.selector}
           onChange={handleChange}
           name="gender"
-          value={gender}
+          value={fields.gender}
         >
           <option value="">Gender</option>
           <option value="Masculin">Masculin</option>
           <option value="Feminin">Feminin</option>
           <option value="Ma abtin">Ma abtin</option>
         </select>
-        <select name="status">
+        <select name="status" onChange={handleChange} value={fields.status}>
           <option value="">Status</option>
           <option value="Administrator">Administrator</option>
           <option value="Moderator">Moderator</option>
         </select>
         <label htmlFor="agreement" className={styles.label}>
           <input
-            // className={styles.confirmation}
             name="agreement"
             type="checkbox"
             checked={agreement}

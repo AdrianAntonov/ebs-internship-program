@@ -6,14 +6,9 @@ interface UserProps {
   lastName: string;
   email: string;
   gender: string;
+  handleUserList: () => void;
+  handleEditUser: (id: number) => void;
 }
-// de transmis prin props functia DE DELETE
-// de facut GET fetch, si INTREBARE SA FIE ID-URILE consecutive dupa DELETE
-
-const handleDeleteUser = (arg: number) => {
-  console.log(arg);
-  deleteUser(arg);
-};
 
 const UserListItem: React.FC<UserProps> = ({
   id,
@@ -21,7 +16,20 @@ const UserListItem: React.FC<UserProps> = ({
   lastName,
   email,
   gender,
+  handleUserList,
+  handleEditUser,
 }) => {
+  const handleDeleteUser = (arg: number) => {
+    console.log(arg);
+    deleteUser(arg);
+    handleUserList();
+  };
+
+  const handleEditUserItem = (id: number) => {
+    handleEditUser(id);
+    console.log("editUser, edit button");
+  };
+
   return (
     <>
       <tr key={id}>
@@ -29,11 +37,10 @@ const UserListItem: React.FC<UserProps> = ({
         <td>
           {firstName} {lastName}
         </td>
-        {/* <td></td> */}
         <td>{email}</td>
         <td>{gender}</td>
         <td>
-          <button>Edit</button>
+          <button onClick={() => handleEditUserItem(id)}>Edit</button>
           <button onClick={() => handleDeleteUser(id)}>Delete</button>
         </td>
       </tr>

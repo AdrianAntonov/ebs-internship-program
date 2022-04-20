@@ -10,6 +10,11 @@ export interface IaddingUser {
   email: string;
   gender: string;
   agreement: boolean;
+  status?: string;
   password?: string;
   confirmPassword?: string;
 }
+
+// export interface IeditUser {
+
+// }

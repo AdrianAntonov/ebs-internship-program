@@ -37,6 +37,12 @@ export const getUserByID = async (id: number) => {
   return data;
 };
 
+export const editUser = async (id: number, cred: {}) => {
+  const { data } = await axios.put(`/users/${id}`, cred);
+  console.log("editUser");
+  return data;
+};
+
 // export const unspsh = async () => {
 //   // const data = await axios("https://api.unsplash.com/photos/random");
 //   const { data } = await axios(
@@ -50,6 +56,7 @@ const fetching = {
   addingUser,
   deleteUser,
   getUserByID,
+  editUser,
   // unspsh,
 };
 
