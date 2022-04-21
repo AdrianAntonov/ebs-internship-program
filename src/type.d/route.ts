@@ -15,6 +15,9 @@ export interface IaddingUser {
   confirmPassword?: string;
 }
 
-// export interface IeditUser {
-
-// }
+export interface IaddPost {
+  title: string;
+  area: string;
+  link: string;
+  date: string;
+}

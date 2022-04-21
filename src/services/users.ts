@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IaddingUser } from "../type.d/route";
+import { IaddingUser, IaddPost } from "../type.d/route";
 // const KEY = "mG1lAJOyXhDVeAJwLP7UMfzuWbGksCCZkrr2SH4f0PU";
 // const BASE_URL = "http://localhost:3001";
 
@@ -11,13 +11,29 @@ export const getUsers = async () => {
   return data;
 };
 
+export const getPosts = async () => {
+  //axios.get(`${BASE_URL}/posts`).then((response) => console.log(response));
+  const { data } = await axios.get("/posts");
+  return data;
+};
+
 export const addingUser = async (user: IaddingUser) => {
   const { data } = await axios.post("/users", user);
   return data;
 };
 
+export const addPost = async (post: IaddPost) => {
+  const { data } = await axios.post("/posts", post);
+  return data;
+};
+
 export const deleteUser = async (userId: number) => {
   const { data } = await axios.delete(`/users/${userId}`);
+  return data;
+};
+
+export const deletePost = async (userId: number) => {
+  const { data } = await axios.delete(`/posts/${userId}`);
   return data;
 };
 
@@ -57,6 +73,10 @@ const fetching = {
   deleteUser,
   getUserByID,
   editUser,
+  getPosts,
+  addPost,
+  deletePost,
+  checkUser,
   // unspsh,
 };
 

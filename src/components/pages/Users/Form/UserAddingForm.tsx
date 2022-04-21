@@ -17,18 +17,25 @@ const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
   const [gender, setGender] = useState("");
   const [status, setStatus] = useState("");
   const [fields, setFields] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    agreement: "",
-    gender: "",
-    status: "",
+    firstName,
+    lastName,
+    email,
+    gender,
+    status,
   });
 
   const standard = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
   const verifyInputs =
-    !firstName || !lastName || !email || !gender || !agreement;
-
+    !fields.firstName ||
+    !fields.lastName ||
+    !fields.email ||
+    !fields.gender ||
+    !fields.status ||
+    !agreement;
+  // const verifyInputs = Boolean(
+  //   !firstName || !lastName || !email || !gender || !agreement || !status
+  // );
+  // console.log(verifyInputs);
   const handleChange = (
     e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -38,6 +45,7 @@ const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
 
     setFields((prevState) => ({ ...prevState, [name]: value }));
 
+    // console.log(verifyInputs);
     // switch (name) {
     //   case "firstName":
     //     setFirstName(value);
@@ -50,6 +58,9 @@ const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
     //     break;
     //   case "gender":
     //     setGender(value);
+    //     break;
+    //   case "status":
+    //     setStatus(value);
     //     break;
     //   default:
     //     return;
@@ -70,24 +81,18 @@ const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    console.log(fields);
     editId
-      ? editUser(editId, {
-          firstName,
-          lastName,
-          email,
-          agreement,
-          gender,
-          status,
-        })
-      : addingUser({
-          firstName,
-          lastName,
-          email,
-          agreement,
-          gender,
-          status,
-        });
+      ? editUser(editId, { ...fields, agreement })
+      : addingUser({ ...fields, agreement });
+    // addingUser({
+    //     firstName,
+    //     lastName,
+    //     email,
+    //     agreement,
+    //     gender,
+    //     status,
+    //   });
 
     toggleCheckbox();
     onClose();
@@ -97,7 +102,6 @@ const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
   return (
     <div>
       <form className={styles.formular} onSubmit={handleSubmit}>
-        <h3>Sign Up</h3>
         <input
           onChange={handleChange}
           name="firstName"
@@ -152,9 +156,7 @@ const UserAddingForm = ({ onClose, editId }: UserAddingProp) => {
             I agree with the processing of personal data
           </span>
         </label>
-        <button disabled={verifyInputs} type="submit">
-          Submit
-        </button>
+        <button disabled={verifyInputs}>Submit</button>
       </form>
     </div>
   );
