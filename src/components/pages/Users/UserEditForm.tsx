@@ -1,18 +1,20 @@
-import { useState, ChangeEvent } from "react";
-import { addingUser } from "../../../../services/users";
-import styles from "./UserAddingForm.module.css";
+import { useState, useEffect } from "react";
+import { editUser, getUserByID } from "../../../services/users";
+import styles from "../Users/Users.module.css";
 
 interface UserAddingProp {
-  onClose: () => void;
+  onCloseEdit: () => void;
+  editId: number;
 }
 
-const UserAddingForm = ({ onClose }: UserAddingProp) => {
+const UserEditForm = ({ onCloseEdit, editId }: UserAddingProp) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLasttName] = useState("");
   const [email, setEmail] = useState("");
   const [agreement, setAgreement] = useState(false);
   const [gender, setGender] = useState("");
   const [role, setRole] = useState("");
+
   const [fields, setFields] = useState({
     firstName,
     lastName,
@@ -30,10 +32,18 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
     !fields.role ||
     !agreement;
 
+  useEffect(() => {
+    getUserByID(editId).then((res) => setFields(res));
+  }, [editId]);
+
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ) => {
     e.preventDefault();
+
+    console.log(e.target);
 
     const { name, value } = e.target;
 
@@ -54,17 +64,19 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(fields);
+    console.log(firstName, lastName, email, gender, role);
     // editId
     //   ? editUser(editId, { ...fields, agreement })
     //   : addingUser({ ...fields, agreement });
 
-    addingUser({ ...fields, agreement });
+    editUser(editId, { ...fields, agreement });
 
     toggleCheckbox();
-    onClose();
+    onCloseEdit();
     reset();
   };
+
+  console.log(fields);
 
   return (
     <div>
@@ -129,4 +141,4 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
   );
 };
 
-export default UserAddingForm;
+export default UserEditForm;

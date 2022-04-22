@@ -1,6 +1,6 @@
 import styles from "./Login.module.css";
 import { checkUser } from "../../services/users";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import Modal from "../Modal/Modal";
 import { useContext, useState, ChangeEvent } from "react";
 import context from "../../context/app-context";
@@ -11,6 +11,8 @@ const Login: React.FC = () => {
   const [modal, setModal] = useState(true);
   const { user, setUser } = useContext(context);
   console.log(user);
+
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -44,6 +46,7 @@ const Login: React.FC = () => {
       if (res.length === 0) {
         alert("Sign up, please!");
         reset();
+        navigate("/");
         return;
       }
 
@@ -66,6 +69,7 @@ const Login: React.FC = () => {
               placeholder="Email"
               type="email"
               value={email}
+              autoComplete="off"
             />
             <input
               onChange={handleChange}
@@ -73,6 +77,7 @@ const Login: React.FC = () => {
               placeholder="Password"
               type="password"
               value={password}
+              autoComplete="off"
             />
             <button onClick={logUser} disabled={!email || !password}>
               Log in

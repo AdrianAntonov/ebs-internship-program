@@ -41,7 +41,7 @@ export const checkUser = async (email: string, password: string) => {
   const { data } = await axios.get(
     `/users?email=${email}&password=${password}`
   );
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
@@ -50,6 +50,14 @@ export const getUserByID = async (id: number) => {
     return {};
   }
   const { data } = await axios.get(`/users/${id}`);
+  return data;
+};
+
+export const getPostByID = async (id: any) => {
+  if (id === undefined || null) {
+    return {};
+  }
+  const { data } = await axios.get(`/posts/${id}`);
   return data;
 };
 

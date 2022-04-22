@@ -39,18 +39,15 @@ const PostItem: React.FC<IpostItemProps> = ({
   };
 
   return (
-    <>
-      {/* {deleteModal && <Modal onClose={onClose}></Modal>} */}
-      <div key={id}>
-        <p>{id}</p>
-        <p>{title}</p>
-        <p>{area}</p>
-        <p>{link}</p>
-        <p>{date}</p>
-        <button onClick={() => handleEditPostItem(id)}>Edit</button>
-        <button onClick={() => handleDeletePostItem(id)}>Delete</button>
-      </div>
-    </>
+    <div>
+      <p>{id}</p>
+      <p>{title}</p>
+      <p>{area}</p>
+      <p>{link}</p>
+      <p>{date}</p>
+      <button onClick={() => handleEditPostItem(id)}>Edit</button>
+      <button onClick={() => handleDeletePostItem(id)}>Delete</button>
+    </div>
   );
 };
 

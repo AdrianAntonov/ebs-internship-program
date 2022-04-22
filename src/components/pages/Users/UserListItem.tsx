@@ -1,4 +1,6 @@
 import { deleteUser } from "../../../services/users";
+import context from "../../../context/app-context";
+import { useContext } from "react";
 
 interface UserProps {
   id: number;
@@ -19,6 +21,8 @@ const UserListItem: React.FC<UserProps> = ({
   handleUserList,
   handleEditUser,
 }) => {
+  const { user } = useContext(context);
+
   const handleDeleteUser = (arg: number) => {
     console.log(arg);
     deleteUser(arg);
@@ -40,8 +44,12 @@ const UserListItem: React.FC<UserProps> = ({
         <td>{email}</td>
         <td>{gender}</td>
         <td>
-          <button onClick={() => handleEditUserItem(id)}>Edit</button>
-          <button onClick={() => handleDeleteUser(id)}>Delete</button>
+          {user.role === "Administrator" && (
+            <>
+              <button onClick={() => handleEditUserItem(id)}>Edit</button>
+              <button onClick={() => handleDeleteUser(id)}>Delete</button>
+            </>
+          )}
         </td>
       </tr>
     </>

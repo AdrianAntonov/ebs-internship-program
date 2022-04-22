@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import context from "../../../context/app-context";
 // import styles from "./Posts.module.css";
-import PostForm from "./PostForm";
-import { getPosts, deletePost } from "../../../services/users";
+// import PostForm from "./PostForm";
+import { getPosts } from "../../../services/users";
 import PostItem from "./PostItem";
 import Modal from "../../Modal/Modal";
 import Warning from "./Warning";
@@ -13,11 +13,13 @@ const Posts: React.FC = () => {
     user: { agreement },
   } = useContext(context);
 
+  const navigate = useNavigate();
+
   const [posts, setPosts] = useState([]);
   const [refreshPosts, setRefreshPosts] = useState(false);
   const [modal, setModal] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
-  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [warningId, setWarningId] = useState(0);
 
   useEffect(() => {
     getPosts().then((res) => setPosts(res));
@@ -25,11 +27,19 @@ const Posts: React.FC = () => {
 
   // console.log(posts);
 
-  // include modalul t|f, refresh lista
-  const onClose = () => {
-    setModal(!modal); // toggle la modal
-    handlePostsList();
+  const redirectToFormPage = () => {
+    navigate("/create");
   };
+
+  // const redirectToEditPage = (id: number) => {
+  //   navigate("/`/posts/{id}/edit`");
+  // };
+
+  // include modalul t|f, refresh lista
+  // const onClose = () => {
+  //   setModal(!modal); // toggle la modal
+  //   handlePostsList();
+  // };
 
   const handleWarning = () => {
     setWarningModal(!warningModal);
@@ -40,31 +50,24 @@ const Posts: React.FC = () => {
     setRefreshPosts(!refreshPosts);
   };
 
-  // pentru click pe butonul Submit la AddingForm
-  // const handleAddUserButton = () => {
-  //   onClose();
-  // };
-  const confirmPostDelete = () => {
-    setConfirmDelete(!confirmDelete);
-  };
-
   const deletePostItem = (id: number) => {
-    if (confirmDelete) {
-      deletePost(id);
-    }
+    setWarningId(id);
     handleWarning();
     handlePostsList();
   };
 
   // primeste id-ul item-ului si ilseteaza in state
   const handleEditPost = (id: number) => {
-    console.log("handleEditUser");
+    navigate(`/posts/${id}/edit`, { state: id });
+
+    // console.log("handleEditUser");
     // setEditId(id);
     // setModalAdd(!modalAdd);
   };
 
   const postList = posts.map(({ id, title, area, link, date }) => (
     <PostItem
+      key={id}
       id={id}
       title={title}
       area={area}
@@ -81,17 +84,21 @@ const Posts: React.FC = () => {
     <>
       {agreement || window.localStorage.length > 0 ? (
         <>
-          <button onClick={() => setModal(!modal)}>Add a post</button>
-          {modal && (
+          {/* <button onClick={() => setModal(!modal)}>Add a post</button> */}
+          <button type="button" onClick={redirectToFormPage}>
+            Add a Post
+          </button>
+          {/* {modal && (
             <Modal onClose={onClose}>
               <PostForm onClose={onClose} />
             </Modal>
-          )}
+          )} */}
           {warningModal && (
             <Modal onClose={handleWarning}>
               <Warning
                 onClose={handleWarning}
-                confirmPostDelete={confirmPostDelete}
+                warningId={warningId}
+                handlePostsList={handlePostsList}
               />
             </Modal>
           )}

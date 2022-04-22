@@ -115,6 +115,7 @@ function Registration() {
                 pattern={standard}
                 value={firstName}
                 id="firstName"
+                autoComplete="off"
               />
               <input
                 onChange={handleChange}
@@ -123,6 +124,7 @@ function Registration() {
                 type="text"
                 pattern={standard}
                 value={lastName}
+                autoComplete="off"
               />
               <input
                 onChange={handleChange}
@@ -130,6 +132,7 @@ function Registration() {
                 placeholder="Email"
                 type="email"
                 value={email}
+                autoComplete="off"
               />
               <input
                 onChange={handleChange}

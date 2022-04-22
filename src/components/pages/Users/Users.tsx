@@ -6,15 +6,20 @@ import context from "../../../context/app-context";
 import UserListItem from "./UserListItem";
 import UserAddingForm from "./Form/UserAddingForm";
 import Modal from "../../Modal/Modal";
+import UserEditForm from "./UserEditForm";
 
 const Users: React.FC = () => {
   const [modalAdd, setModalAdd] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [editId, setEditId] = useState(0);
   const [refreshUserList, setRefreshUserList] = useState(false);
-  const {
-    user: { agreement },
-  } = useContext(context);
+  // const {
+  //   user: { agreement },
+  // } = useContext(context);
+  const { user } = useContext(context);
+
+  console.log(user);
 
   useEffect(() => {
     getUsers().then((res) => setUsersList(res));
@@ -24,6 +29,10 @@ const Users: React.FC = () => {
   // include modalul t|f, refresh lista
   const onClose = () => {
     setModalAdd(!modalAdd); // toggle la modal
+    handleUserList();
+  };
+  const onCloseEdit = () => {
+    setModalEdit(!modalEdit);
     handleUserList();
   };
 
@@ -41,7 +50,7 @@ const Users: React.FC = () => {
   const handleEditUser = (id: number) => {
     console.log("handleEditUser");
     setEditId(id);
-    setModalAdd(!modalAdd);
+    setModalEdit(!modalEdit);
   };
 
   const showUserList = usersList.map(
@@ -58,14 +67,22 @@ const Users: React.FC = () => {
       />
     )
   );
+
   return (
     <>
-      {agreement || window.localStorage.length > 0 ? (
+      {user.agreement || window.localStorage.length > 0 ? (
         <div>
-          <button onClick={handleAddUserButton}>Add a user</button>
+          {user.role === "Administrator" && (
+            <button onClick={handleAddUserButton}>Add a user</button>
+          )}
           {modalAdd && (
             <Modal onClose={onClose}>
-              <UserAddingForm editId={editId} onClose={onClose} />
+              <UserAddingForm onClose={onClose} />
+            </Modal>
+          )}
+          {modalEdit && (
+            <Modal onClose={onCloseEdit}>
+              <UserEditForm editId={editId} onCloseEdit={onCloseEdit} />
             </Modal>
           )}
           <table>
@@ -75,7 +92,7 @@ const Users: React.FC = () => {
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Gender</th>
-                <th>Action</th>
+                {user.role === "Administrator" && <th>Action</th>}
               </tr>
             </thead>
             <tbody>{showUserList}</tbody>

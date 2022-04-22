@@ -7,6 +7,7 @@ interface IsetUser {
     email: string;
     gender: string;
     agreement: boolean;
+    role?: string;
   };
   setUser: React.Dispatch<
     React.SetStateAction<{
@@ -15,6 +16,7 @@ interface IsetUser {
       email: string;
       gender: string;
       agreement: boolean;
+      role?: string;
     }>
   >;
 }
