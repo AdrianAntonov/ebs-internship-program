@@ -53,6 +53,7 @@ export const getUserByID = async (id: number) => {
   return data;
 };
 
+////////// CE TIP TRENBUIE SA FIE PENTRU id ?
 export const getPostByID = async (id: any) => {
   if (id === undefined || null) {
     return {};
@@ -64,6 +65,13 @@ export const getPostByID = async (id: any) => {
 export const editUser = async (id: number, cred: {}) => {
   const { data } = await axios.put(`/users/${id}`, cred);
   console.log("editUser");
+  return data;
+};
+
+////////// CE TIP TREBUIE SA FIE PENTRU id ?
+export const editPost = async (id: any, cred: {}) => {
+  const { data } = await axios.put(`/posts/${id}`, cred);
+  console.log("editPost");
   return data;
 };
 

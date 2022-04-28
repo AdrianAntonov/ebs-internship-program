@@ -17,7 +17,7 @@ const Posts: React.FC = () => {
 
   const [posts, setPosts] = useState([]);
   const [refreshPosts, setRefreshPosts] = useState(false);
-  const [modal, setModal] = useState(false);
+  // const [modal, setModal] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
   const [warningId, setWarningId] = useState(0);
 
@@ -56,13 +56,9 @@ const Posts: React.FC = () => {
     handlePostsList();
   };
 
-  // primeste id-ul item-ului si ilseteaza in state
+  // primeste id-ul item-ului si il seteaza in state
   const handleEditPost = (id: number) => {
     navigate(`/posts/${id}/edit`, { state: id });
-
-    // console.log("handleEditUser");
-    // setEditId(id);
-    // setModalAdd(!modalAdd);
   };
 
   const postList = posts.map(({ id, title, area, link, date }) => (
@@ -73,10 +69,10 @@ const Posts: React.FC = () => {
       area={area}
       link={link}
       date={date}
-      // handlePostsList={handlePostsList}
       handleWarning={handleWarning}
       handleEditPost={handleEditPost}
       deletePostItem={deletePostItem}
+      handlePostsList={handlePostsList}
     />
   ));
 
@@ -84,15 +80,9 @@ const Posts: React.FC = () => {
     <>
       {agreement || window.localStorage.length > 0 ? (
         <>
-          {/* <button onClick={() => setModal(!modal)}>Add a post</button> */}
           <button type="button" onClick={redirectToFormPage}>
             Add a Post
           </button>
-          {/* {modal && (
-            <Modal onClose={onClose}>
-              <PostForm onClose={onClose} />
-            </Modal>
-          )} */}
           {warningModal && (
             <Modal onClose={handleWarning}>
               <Warning

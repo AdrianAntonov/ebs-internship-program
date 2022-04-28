@@ -11,6 +11,7 @@ interface IpostItemProps {
   handleEditPost: (id: number) => void;
   handleWarning: () => void;
   deletePostItem: (id: number) => void;
+  handlePostsList: () => void;
 }
 
 const PostItem: React.FC<IpostItemProps> = ({
@@ -19,7 +20,7 @@ const PostItem: React.FC<IpostItemProps> = ({
   area,
   link,
   date,
-  // handlePostsList,
+  handlePostsList,
   handleWarning,
   handleEditPost,
   deletePostItem,

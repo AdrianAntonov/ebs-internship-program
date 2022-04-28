@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { addPost, getPostByID } from "../../../services/users";
+import { useNavigate, useLocation, Navigate } from "react-router-dom";
+import { getPostByID, editPost } from "../../../services/users";
+import { useContext } from "react";
+import context from "../../../context/app-context";
 import styles from "./Posts.module.css";
 
 // interface IPostAddingProp {
@@ -9,10 +11,10 @@ import styles from "./Posts.module.css";
 // }
 // const RedirectPostForm = ({ onClose }: IPostAddingProp) => {
 const PostEdit = () => {
-  const [date, setDate] = useState("");
-  const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
-  const [area, setArea] = useState("");
+  const [date] = useState("");
+  const [title] = useState("");
+  const [link] = useState("");
+  const [area] = useState("");
   const [postState, setPostState] = useState({
     title,
     area,
@@ -21,11 +23,14 @@ const PostEdit = () => {
   });
 
   const { state } = useLocation();
+
   const navigate = useNavigate();
-  console.dir(state);
+
+  const { user } = useContext(context);
 
   useEffect(() => {
     getPostByID(state).then((res) => setPostState(res));
+    console.log("PostEdit useEffect");
   }, [state]);
 
   const checkInputs =
@@ -45,10 +50,6 @@ const PostEdit = () => {
 
   const reset = () => {
     setPostState({ title: "", area: "", link: "", date: "" });
-    // setDate("");
-    // setTitle("");
-    // setLink("");
-    // setArea("");
     console.log("reset");
   };
 
@@ -56,60 +57,62 @@ const PostEdit = () => {
     e.preventDefault();
     console.log("posts");
 
-    addPost(postState);
+    editPost(state, postState);
     reset();
+    console.log(postState);
     navigate("/posts");
-
-    // onClose();
   };
 
   return (
     <>
-      <h4>Redirect PostForm</h4>
-      <form className={styles.formular} onSubmit={handleSubmitPost}>
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            name="title"
-            type="text"
-            required
-            id="title"
-            value={postState.title}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="text">Post here</label>
-          <textarea
-            name="area"
-            id="text"
-            placeholder="Post here..."
-            required
-            value={postState.area}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="Photo link">Photo link</label>
-          <input
-            type="text"
-            name="link"
-            value={postState.link}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={postState.date}
-            onChange={handleChange}
-          />
-        </div>
-        <button disabled={checkInputs}>Post</button>
-      </form>
+      {user.agreement ? (
+        <form className={styles.formular} onSubmit={handleSubmitPost}>
+          <div>
+            <label htmlFor="title">Title</label>
+            <input
+              name="title"
+              type="text"
+              required
+              id="title"
+              value={postState.title}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="text">Post here</label>
+            <textarea
+              name="area"
+              id="text"
+              placeholder="Post here..."
+              required
+              value={postState.area}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="Photo link">Photo link</label>
+            <input
+              type="text"
+              name="link"
+              value={postState.link}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={postState.date}
+              onChange={handleChange}
+            />
+          </div>
+          <button disabled={checkInputs}>Post</button>
+        </form>
+      ) : (
+        <Navigate replace to="/" />
+      )}
     </>
   );
 };
