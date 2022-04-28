@@ -1,0 +1,127 @@
+{
+  "users": [
+    {
+      "firstName": "Josh",
+      "lastName": "Crow",
+      "email": "jocrow@mail.com",
+      "agreement": true,
+      "gender": "Masculin",
+      "id": 1
+    },
+    {
+      "firstName": "Sarah",
+      "lastName": "Jones",
+      "email": "sarj@mail.com",
+      "gender": "Feminin",
+      "role": "Administrator",
+      "password": "123321",
+      "agreement": true,
+      "id": 15
+    },
+    {
+      "firstName": "Sammy",
+      "lastName": "Brown",
+      "email": "sam@mail.com",
+      "gender": "Feminin",
+      "role": "Moderator",
+      "agreement": true,
+      "id": 16
+    },
+    {
+      "firstName": "Jimmy",
+      "lastName": "Bale",
+      "email": "jiom@mail.com",
+      "password": "123321",
+      "agreement": true,
+      "gender": "Masculin",
+      "role": "Administrator",
+      "id": 17
+    },
+    {
+      "firstName": "Sammy",
+      "lastName": "Brown",
+      "email": "sam@mail.com",
+      "gender": "Feminin",
+      "role": "Moderator",
+      "agreement": true,
+      "id": 18
+    },
+    {
+      "firstName": "Micky",
+      "lastName": "Jagger",
+      "email": "jag@m.com",
+      "gender": "Masculin",
+      "role": "Administrator",
+      "agreement": true,
+      "id": 19
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "some comment !!!",
+      "area": "Every time you eat, Colgate is watching you",
+      "link": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1586227740560-8cf2732c1531",
+      "date": "2022-04-27"
+    },
+    {
+      "id": 2,
+      "title": "Chunga-Changa",
+      "area": "The Best place in the world!!! ",
+      "link": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1586227740560-8cf2732c1531",
+      "date": "2022-04-26"
+    },
+    {
+      "title": "My Post",
+      "area": "I'd like to say Hello World!",
+      "link": "www.gidonline.io",
+      "date": "2022-04-21",
+      "id": 3
+    },
+    {
+      "title": "Another post",
+      "area": "Don't worry, Be Happy!",
+      "link": "www.gidonline.io",
+      "date": "2022-04-22",
+      "id": 4
+    },
+    {
+      "title": "hongildon",
+      "area": "ddddddd",
+      "link": "ascdasd",
+      "date": "2022-04-22",
+      "id": 7
+    },
+    {
+      "title": "voievoda",
+      "area": "fdureka",
+      "link": "rolot",
+      "date": "2022-04-27",
+      "id": 9
+    },
+    {
+      "title": "ppopop",
+      "area": "56765",
+      "link": "w",
+      "date": "2022-04-27",
+      "id": 10
+    },
+    {
+      "title": "last",
+      "area": "postert ghj",
+      "link": "here uiuiui",
+      "date": "2022-04-26",
+      "id": 14
+    },
+    {
+      "title": "MYANMAR",
+      "area": "ytytytytyt",
+      "link": "eeeeeee",
+      "date": "2022-04-27",
+      "id": 16
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
