@@ -1,0 +1,60 @@
+// $danger-color: #ff0d00 !default;
+
+.post-container {
+  margin-top: 10px;
+}
+
+.information {
+  padding: 5px;
+  background: linear-gradient(#f9fbff, #f6faff);
+}
+
+.paragraph {
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.label {
+  width: 4rem;
+  transition: 0.2s;
+  backface-visibility: hidden;
+}
+
+.label:hover,
+.addButton:hover {
+  cursor: pointer;
+  transform: scale(1.04);
+  backface-visibility: hidden;
+}
+
+.info {
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+
+.card {
+  margin-top: 10px;
+  font-family: "Georgia";
+}
+
+.buttonsSpace {
+  padding: 7px 0px;
+  background-color: #f6faff;
+}
+
+.addButton {
+  margin-left: 15px;
+  margin-bottom: 25px;
+  transition: 0.2s;
+  backface-visibility: hidden;
+}
+.modal {
+  text-align: center;
+  color: rgb(197, 37, 9);
+}
+
+.modal-buttons {
+  margin: 10px 0px;
+}

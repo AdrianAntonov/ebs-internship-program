@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Container from "./components/Container/Container";
 import AppProvider from "./context/AppProvider";
 import NavBar from "./components/Navigation/NavBar/NavBar";
+import "ebs-design/dist/styles/index.scss";
 // import UserAddingForm from "./components/pages/Users/Form/UserAddingForm";
 // import HomePage from "./components/HomePage/HomePage";
 // import Registration from "./components/Registration/Registration";

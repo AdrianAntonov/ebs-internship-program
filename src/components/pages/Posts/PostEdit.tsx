@@ -23,6 +23,7 @@ const PostEdit = () => {
   });
 
   const { state } = useLocation();
+  console.log(typeof state);
 
   const navigate = useNavigate();
 

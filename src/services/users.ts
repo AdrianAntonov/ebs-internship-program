@@ -88,6 +88,7 @@ const fetching = {
   addingUser,
   deleteUser,
   getUserByID,
+  getPostByID,
   editUser,
   getPosts,
   addPost,

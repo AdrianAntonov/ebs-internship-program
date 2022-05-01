@@ -1,0 +1,67 @@
+.post-container {
+  margin-top: 10px;
+}
+
+.information {
+  padding: 5px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#f9fbff), to(#f6faff));
+  background: linear-gradient(#f9fbff, #f6faff);
+}
+
+.paragraph {
+  padding-bottom: 10px;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.label {
+  width: 4rem;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.label:hover,
+.addButton:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.04);
+          transform: scale(1.04);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.info {
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: underline;
+}
+
+.card {
+  margin-top: 10px;
+  font-family: "Georgia";
+}
+
+.buttonsSpace {
+  padding: 7px 0px;
+  background-color: #f6faff;
+}
+
+.addButton {
+  margin-left: 15px;
+  margin-bottom: 25px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.modal {
+  text-align: center;
+  color: #c52509;
+}
+
+.modal-buttons {
+  margin: 10px 0px;
+}
+/*# sourceMappingURL=PostTest.css.map */

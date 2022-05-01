@@ -1,5 +1,7 @@
 // import { useState } from "react";
 // import Modal from "../../Modal/Modal";
+import { Card, Space, Label } from "ebs-design";
+import "./PostTest.scss";
 
 interface IpostItemProps {
   id: number;
@@ -7,11 +9,9 @@ interface IpostItemProps {
   area: string;
   link: string;
   date: string;
-  // handlePostsList: () => void;
   handleEditPost: (id: number) => void;
   handleWarning: () => void;
   deletePostItem: (id: number) => void;
-  handlePostsList: () => void;
 }
 
 const PostItem: React.FC<IpostItemProps> = ({
@@ -20,17 +20,13 @@ const PostItem: React.FC<IpostItemProps> = ({
   area,
   link,
   date,
-  handlePostsList,
   handleWarning,
   handleEditPost,
   deletePostItem,
 }) => {
   const handleDeletePostItem = (id: number) => {
-    // console.log(arg);
-    // deletePost(id);
     handleWarning();
-    // metoda  DELETE
-    // handlePostsList();
+
     deletePostItem(id);
   };
 
@@ -40,15 +36,43 @@ const PostItem: React.FC<IpostItemProps> = ({
   };
 
   return (
-    <div>
-      <p>{id}</p>
-      <p>{title}</p>
-      <p>{area}</p>
-      <p>{link}</p>
-      <p>{date}</p>
-      <button onClick={() => handleEditPostItem(id)}>Edit</button>
-      <button onClick={() => handleDeletePostItem(id)}>Delete</button>
-    </div>
+    <Card className="card">
+      <div className="information">
+        <p className="paragraph">{id}</p>
+        <span className="info">Title</span>
+        <p className="paragraph" id="title">
+          {title}
+        </p>
+        <span className="info">Post content</span>
+        <p className="paragraph">{area}</p>
+        <span className="info">Link</span>
+        <p className="paragraph">{link}</p>
+        <span className="info">Date</span>
+        <p className="paragraph">{date}</p>
+      </div>
+
+      <Space
+        align="center"
+        justify="center"
+        size="medium"
+        className="buttonsSpace"
+      >
+        <Label
+          status="info"
+          text="Edit"
+          type="fill"
+          onClick={() => handleEditPostItem(id)}
+          className="label"
+        ></Label>
+        <Label
+          status="danger"
+          text="Delete"
+          type="fill"
+          onClick={() => handleDeletePostItem(id)}
+          className="label"
+        ></Label>
+      </Space>
+    </Card>
   );
 };
 

@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import context from "../../../context/app-context";
-// import styles from "./Posts.module.css";
-// import PostForm from "./PostForm";
 import { getPosts } from "../../../services/users";
 import PostItem from "./PostItem";
-import Modal from "../../Modal/Modal";
+// import Modal from "../../Modal/Modal";
 import Warning from "./Warning";
+import { Row, Col, Container, Label, Modal } from "ebs-design";
+import "./PostTest.scss";
 
 const Posts: React.FC = () => {
   const {
@@ -62,29 +62,50 @@ const Posts: React.FC = () => {
   };
 
   const postList = posts.map(({ id, title, area, link, date }) => (
-    <PostItem
-      key={id}
-      id={id}
-      title={title}
-      area={area}
-      link={link}
-      date={date}
-      handleWarning={handleWarning}
-      handleEditPost={handleEditPost}
-      deletePostItem={deletePostItem}
-      handlePostsList={handlePostsList}
-    />
+    <Col size={3} key={id}>
+      <PostItem
+        key={id}
+        id={id}
+        title={title}
+        area={area}
+        link={link}
+        date={date}
+        handleWarning={handleWarning}
+        handleEditPost={handleEditPost}
+        deletePostItem={deletePostItem}
+      />
+    </Col>
   ));
 
   return (
-    <>
+    <div>
       {agreement || window.localStorage.length > 0 ? (
-        <>
-          <button type="button" onClick={redirectToFormPage}>
-            Add a Post
-          </button>
+        <div className="post-container">
+          <Label
+            type="fill"
+            status="success"
+            text="Add a post"
+            className="addButton"
+            onClick={redirectToFormPage}
+          ></Label>
           {warningModal && (
-            <Modal onClose={handleWarning}>
+            // <Modal onClose={handleWarning}>
+            //   <Warning
+            //     onClose={handleWarning}
+            //     warningId={warningId}
+            //     handlePostsList={handlePostsList}
+            //   />
+            // </Modal>
+            <Modal
+              closeOnClickOutside
+              header=""
+              mask
+              open
+              size="small"
+              title="Do rou really want to delete the post?"
+              onClose={handleWarning}
+              className="modal"
+            >
               <Warning
                 onClose={handleWarning}
                 warningId={warningId}
@@ -92,12 +113,16 @@ const Posts: React.FC = () => {
               />
             </Modal>
           )}
-          {posts && postList}
-        </>
+          {posts && (
+            <Container>
+              <Row>{postList}</Row>
+            </Container>
+          )}
+        </div>
       ) : (
         <Navigate to="/" />
       )}
-    </>
+    </div>
   );
 };
 

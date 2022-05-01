@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../../../services/users";
 import styles from "./Posts.module.css";
+import { Form, Input, Textarea } from "ebs-design";
+// import { FormField } from "ebs-design/dist/components/organisms/Form/FormField";
 
 // interface IPostAddingProp {
 //   onClose: () => void;
@@ -9,10 +11,10 @@ import styles from "./Posts.module.css";
 // }
 // const RedirectPostForm = ({ onClose }: IPostAddingProp) => {
 const PostAddForm = () => {
-  const [date, setDate] = useState("");
-  const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
-  const [area, setArea] = useState("");
+  const [date] = useState("");
+  const [title] = useState("");
+  const [link] = useState("");
+  const [area] = useState("");
   const [postState, setPostState] = useState({
     title,
     area,
@@ -39,10 +41,7 @@ const PostAddForm = () => {
 
   const reset = () => {
     setPostState({ title: "", area: "", link: "", date: "" });
-    // setDate("");
-    // setTitle("");
-    // setLink("");
-    // setArea("");
+
     console.log("reset");
   };
 
@@ -59,7 +58,7 @@ const PostAddForm = () => {
 
   return (
     <>
-      <h4>Redirect PostForm</h4>
+      <h4>Add a post</h4>
       <form className={styles.formular} onSubmit={handleSubmitPost}>
         <div>
           <label htmlFor="title">Title</label>

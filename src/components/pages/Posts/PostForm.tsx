@@ -7,10 +7,10 @@ interface IPostAddingProp {
   // editId: number;
 }
 const PostForm = ({ onClose }: IPostAddingProp) => {
-  const [date, setDate] = useState("");
-  const [title, setTitle] = useState("");
-  const [link, setLink] = useState("");
-  const [area, setArea] = useState("");
+  const [date] = useState("");
+  const [title] = useState("");
+  const [link] = useState("");
+  const [area] = useState("");
   const [postState, setPostState] = useState({
     title,
     area,
@@ -35,10 +35,7 @@ const PostForm = ({ onClose }: IPostAddingProp) => {
 
   const reset = () => {
     setPostState({ title: "", area: "", link: "", date: "" });
-    // setDate("");
-    // setTitle("");
-    // setLink("");
-    // setArea("");
+
     console.log("reset");
   };
 
