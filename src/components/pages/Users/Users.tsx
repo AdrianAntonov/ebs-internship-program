@@ -7,6 +7,7 @@ import UserListItem from "./UserListItem";
 import UserAddingForm from "./Form/UserAddingForm";
 import Modal from "../../Modal/Modal";
 import UserEditForm from "./UserEditForm";
+import { Table, Button, Space } from "ebs-design";
 
 const Users: React.FC = () => {
   const [modalAdd, setModalAdd] = useState(false);
@@ -19,11 +20,11 @@ const Users: React.FC = () => {
   // } = useContext(context);
   const { user } = useContext(context);
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     getUsers().then((res) => setUsersList(res));
-    console.log("users useEffect");
+    // console.log("users useEffect");
   }, [refreshUserList]);
 
   // include modalul t|f, refresh lista
@@ -48,7 +49,7 @@ const Users: React.FC = () => {
 
   // primeste id-ul item-ului si ilseteaza in state
   const handleEditUser = (id: number) => {
-    console.log("handleEditUser");
+    console.log("handleEditUser ", id);
     setEditId(id);
     setModalEdit(!modalEdit);
   };
@@ -68,6 +69,18 @@ const Users: React.FC = () => {
     )
   );
 
+  console.log(showUserList);
+
+  const tes = showUserList.map((item) => item.props);
+  console.log(tes);
+
+  const userTable = usersList.map(
+    ({ id, firstName, lastName, email, gender }) => {
+      const name = `${firstName} ${lastName}`;
+      return { id, name, email, gender };
+    }
+  );
+
   return (
     <>
       {user.agreement || window.localStorage.length > 0 ? (
@@ -85,6 +98,102 @@ const Users: React.FC = () => {
               <UserEditForm editId={editId} onCloseEdit={onCloseEdit} />
             </Modal>
           )}
+          <Table
+            columns={[
+              {
+                dataIndex: "id",
+                // onFilter: function noRefCheck(){},
+                title: "ID",
+              },
+              {
+                dataIndex: "name",
+                title: "Full Name",
+              },
+              {
+                dataIndex: "email",
+                title: "Email",
+              },
+              {
+                dataIndex: "gender",
+                title: "Gender",
+              },
+              {
+                // dataIndex: "",
+                title: "Action",
+                render: ({ id }) => (
+                  <Space>
+                    <Button
+                      type="ghost"
+                      size="small"
+                      children="Edit"
+                      onClick={() => handleEditUser(id)}
+                      // className={cn("calls__play-button", {
+                      //   active: callItem?.id === item.id,
+                      // })}
+                      // disabled={!item.file}
+                      // onClick={() => handleOpenPlayer(item)}
+                      // prefix={
+                      //   <Icon
+                      //     className="activity-log-item__delete__icon"
+                      //     component={Play}
+                      //   />
+                      // }
+                    />
+                    <Button
+                      type="ghost"
+                      size="small"
+                      children="Delete"
+                      // className={cn("calls__play-button", {
+                      //   active: callItem?.id === item.id,
+                      // })}
+                      // disabled={!item.file}
+                      // onClick={() => handleOpenPlayer(item)}
+                      // prefix={
+                      //   <Icon
+                      //     className="activity-log-item__delete__icon"
+                      //     component={Play}
+                      //   />
+                      // }
+                    />
+                  </Space>
+                ),
+              },
+              // {
+              //   dataIndex: "Edit",
+              //   title: "Edit",
+              // },
+              // {
+              //   dataIndex: "Delete",
+              //   title: "Delete",
+              // },
+            ]}
+            data={userTable}
+            // data={[
+            //   {
+            //     email: "sarj@mail.com",
+            //     fullName: "Sarah Jones",
+            //     id: "Test",
+            //     gender: "Female",
+            //     action: "Edit Delete",
+            //   },
+            //   {
+            //     date: "Today",
+            //     desc: "Desc",
+            //     title: "Test",
+            //   },
+            //   {
+            //     date: "Today",
+            //     desc: "Desc",
+            //     title: "Test",
+            //   },
+            //   {
+            //     date: "Today",
+            //     desc: "Desc",
+            //     title: "Test",
+            //   },
+            // ]}
+            size="medium"
+          />
           <table>
             <thead>
               <tr>

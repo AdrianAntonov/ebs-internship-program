@@ -1,6 +1,6 @@
 // import { useState } from "react";
 // import Modal from "../../Modal/Modal";
-import { Card, Space, Label } from "ebs-design";
+import { Card, Space, Button } from "ebs-design";
 import "./PostTest.scss";
 
 interface IpostItemProps {
@@ -57,7 +57,7 @@ const PostItem: React.FC<IpostItemProps> = ({
         size="medium"
         className="buttonsSpace"
       >
-        <Label
+        {/* <Label
           status="info"
           text="Edit"
           type="fill"
@@ -71,6 +71,21 @@ const PostItem: React.FC<IpostItemProps> = ({
           onClick={() => handleDeletePostItem(id)}
           className="label"
         ></Label>
+        <Button className="butt">Delete</Button> */}
+        <Button
+          onClick={() => handleEditPostItem(id)}
+          buttonClass="ebs-button--medium ebs-button butt"
+          type="primary"
+        >
+          Edit
+        </Button>
+        <Button
+          onClick={() => handleDeletePostItem(id)}
+          buttonClass="ebs-button--medium ebs-button butt"
+          type="dark"
+        >
+          Delete
+        </Button>
       </Space>
     </Card>
   );

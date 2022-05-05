@@ -7,7 +7,7 @@ function AppProvider({ children }: any) {
 
   useEffect(() => {
     const storageResult = window.localStorage.getItem("userID");
-    console.log("useEffect");
+    // console.log("useEffect");
     storageResult &&
       getUserByID(Number(storageResult))
         .then((result) => {

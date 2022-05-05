@@ -14,23 +14,6 @@
   font-style: italic;
 }
 
-.label {
-  width: 4rem;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
-.label:hover,
-.addButton:hover {
-  cursor: pointer;
-  -webkit-transform: scale(1.04);
-          transform: scale(1.04);
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
 .info {
   font-weight: 600;
   letter-spacing: 1px;
@@ -47,21 +30,15 @@
   background-color: #f6faff;
 }
 
-.addButton {
-  margin-left: 15px;
-  margin-bottom: 25px;
-  -webkit-transition: 0.2s;
-  transition: 0.2s;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-}
-
 .modal {
   text-align: center;
   color: #c52509;
 }
 
-.modal-buttons {
-  margin: 10px 0px;
+.ebs-button--medium.ebs-button.butt {
+  width: 85px;
+  height: 25px;
+  padding: 0;
+  margin: 0;
 }
 /*# sourceMappingURL=PostTest.css.map */

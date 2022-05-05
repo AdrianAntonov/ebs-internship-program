@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { editUser, getUserByID } from "../../../services/users";
 import styles from "../Users/Users.module.css";
+import { Form } from "ebs-design";
 
 interface UserAddingProp {
   onCloseEdit: () => void;
@@ -80,6 +81,8 @@ const UserEditForm = ({ onCloseEdit, editId }: UserAddingProp) => {
 
   return (
     <div>
+      {/* <Form></Form> */}
+
       <form className={styles.formular} onSubmit={handleSubmit}>
         <input
           onChange={handleChange}

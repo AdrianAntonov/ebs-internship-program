@@ -1,6 +1,6 @@
 import React from "react";
 import { deletePost } from "../../../services/users";
-import { Label, Space } from "ebs-design";
+import { Label, Space, Button } from "ebs-design";
 
 interface IWarningModalProps {
   onClose: () => void;
@@ -28,7 +28,7 @@ const Warning = ({
         justify="center"
         className="modal-buttons"
       >
-        <Label
+        {/* <Label
           status="danger"
           text="YES"
           type="fill"
@@ -41,7 +41,21 @@ const Warning = ({
           type="fill"
           className="label"
           onClick={onClose}
-        ></Label>
+        ></Label> */}
+        <Button
+          onClick={() => confirmDelete()}
+          buttonClass="ebs-button--medium ebs-button butt"
+          type="primary"
+        >
+          Edit
+        </Button>
+        <Button
+          onClick={onClose}
+          buttonClass="ebs-button--medium ebs-button butt"
+          type="dark"
+        >
+          Delete
+        </Button>
       </Space>
     </div>
   );

@@ -5,7 +5,7 @@ import { getPosts } from "../../../services/users";
 import PostItem from "./PostItem";
 // import Modal from "../../Modal/Modal";
 import Warning from "./Warning";
-import { Row, Col, Container, Label, Modal } from "ebs-design";
+import { Row, Col, Container, Modal, Button } from "ebs-design";
 import "./PostTest.scss";
 
 const Posts: React.FC = () => {
@@ -58,7 +58,7 @@ const Posts: React.FC = () => {
 
   // primeste id-ul item-ului si il seteaza in state
   const handleEditPost = (id: number) => {
-    navigate(`/posts/${id}/edit`, { state: id });
+    navigate(`/posts/${id}/edit`);
   };
 
   const postList = posts.map(({ id, title, area, link, date }) => (
@@ -81,13 +81,13 @@ const Posts: React.FC = () => {
     <div>
       {agreement || window.localStorage.length > 0 ? (
         <div className="post-container">
-          <Label
-            type="fill"
-            status="success"
-            text="Add a post"
-            className="addButton"
+          <Button
+            type="ghost"
+            buttonClass="ebs-button--medium ebs-button butt"
             onClick={redirectToFormPage}
-          ></Label>
+          >
+            Add a post
+          </Button>
           {warningModal && (
             // <Modal onClose={handleWarning}>
             //   <Warning

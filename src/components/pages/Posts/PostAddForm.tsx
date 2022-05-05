@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { addPost } from "../../../services/users";
-import styles from "./Posts.module.css";
-import { Form, Input, Textarea } from "ebs-design";
+// import styles from "./Posts.module.css";
+import { Button, Form, Input, Textarea, DatePicker, useForm } from "ebs-design";
 // import { FormField } from "ebs-design/dist/components/organisms/Form/FormField";
 
 // interface IPostAddingProp {
@@ -23,43 +23,114 @@ const PostAddForm = () => {
   });
 
   const navigate = useNavigate();
+  const [form] = useForm();
+  form.setFieldsValue(postState);
 
-  const checkInputs =
-    !postState.title || !postState.area || !postState.link || !postState.date;
+  // const checkInputs =
+  //   !postState.title || !postState.area || !postState.link || !postState.date;
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
+  // const handleChange = (
+  //   e:
+  //     | React.ChangeEvent<HTMLInputElement>
+  //     | React.ChangeEvent<HTMLTextAreaElement>
+  // ) => {
+  //   const { name, value } = e.target;
 
-    e.preventDefault();
+  //   e.preventDefault();
 
-    setPostState((prev) => ({ ...prev, [name]: value }));
-  };
+  //   setPostState((prev) => ({ ...prev, [name]: value }));
+  // };
 
   const reset = () => {
     setPostState({ title: "", area: "", link: "", date: "" });
-
-    console.log("reset");
   };
 
-  const handleSubmitPost = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmitPost = () => {
     console.log("posts");
 
-    addPost(postState);
+    addPost(form.getFieldsValue());
     reset();
     navigate("/posts");
-
-    // onClose();
   };
 
   return (
     <>
       <h4>Add a post</h4>
-      <form className={styles.formular} onSubmit={handleSubmitPost}>
+
+      <Form
+        form={form}
+        controlOptions={{
+          col: {
+            size: 2,
+          },
+        }}
+        labelOptions={{
+          col: {
+            size: 1,
+          },
+        }}
+        type="vertical"
+        onFinish={handleSubmitPost}
+      >
+        <Form.Field
+          label="Title"
+          name="title"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input size="small" placeholder="Title" />
+        </Form.Field>
+        <Form.Field
+          label="Content"
+          name="area"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Textarea placeholder="Type here..." />
+        </Form.Field>
+        <Form.Field
+          label="Link"
+          name="link"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input size="small" placeholder="Link" />
+        </Form.Field>
+        <Form.Field
+          label="Date"
+          name="date"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <DatePicker
+            showTimeSelect
+            small
+            size="small"
+            placeholderText="Date field"
+          />
+        </Form.Field>
+        <Button
+          onClick={() => handleSubmitPost()}
+          buttonClass="ebs-button--medium ebs-button butt"
+          type="ghost"
+        >
+          Submit
+        </Button>
+      </Form>
+
+      {/* <form className={styles.formular} onSubmit={handleSubmitPost}>
         <div>
           <label htmlFor="title">Title</label>
           <input
@@ -102,7 +173,7 @@ const PostAddForm = () => {
           />
         </div>
         <button disabled={checkInputs}>Post</button>
-      </form>
+      </form> */}
     </>
   );
 };
