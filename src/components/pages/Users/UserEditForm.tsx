@@ -1,7 +1,15 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { editUser, getUserByID } from "../../../services/users";
-import styles from "../Users/Users.module.css";
-import { Form } from "ebs-design";
+import "../Posts/PostTest.scss";
+import {
+  Form,
+  useForm,
+  Select,
+  Button,
+  Checkbox,
+  Input,
+  Icon,
+} from "ebs-design";
 
 interface UserAddingProp {
   onCloseEdit: () => void;
@@ -9,137 +17,180 @@ interface UserAddingProp {
 }
 
 const UserEditForm = ({ onCloseEdit, editId }: UserAddingProp) => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLasttName] = useState("");
-  const [email, setEmail] = useState("");
-  const [agreement, setAgreement] = useState(false);
-  const [gender, setGender] = useState("");
-  const [role, setRole] = useState("");
-
-  const [fields, setFields] = useState({
-    firstName,
-    lastName,
-    email,
-    gender,
-    role,
-  });
-
-  const standard = "^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
-  const verifyInputs =
-    !fields.firstName ||
-    !fields.lastName ||
-    !fields.email ||
-    !fields.gender ||
-    !fields.role ||
-    !agreement;
+  const [form] = useForm();
 
   useEffect(() => {
-    getUserByID(editId).then((res) => setFields(res));
-  }, [editId]);
+    console.log(editId);
+    getUserByID(editId).then((res) => {
+      form.setFieldsValue({ ...res, agreement: false });
+    });
+  }, [editId, form]);
 
-  const handleChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    e.preventDefault();
+  const genderOptions = [
+    { text: "Male", value: "Male" },
+    { text: "Female", value: "Female" },
+    { text: "Another", value: "Another" },
+  ];
 
-    console.log(e.target);
+  const roleOptions = [
+    { text: "Administrator", value: "Administrator" },
+    { text: "Moderator", value: "Moderator" },
+  ];
 
-    const { name, value } = e.target;
+  const handleSubmit = () => {
+    const check =
+      form.getFieldValue("firstName") &&
+      form.getFieldValue("lastName") &&
+      form.getFieldValue("email") &&
+      form.getFieldValue("gender") &&
+      form.getFieldValue("role") &&
+      form.getFieldValue("agreement");
 
-    setFields((prevState) => ({ ...prevState, [name]: value }));
-  };
+    if (!check) {
+      alert("Fill all fields!");
+      return;
+    }
 
-  const reset = () => {
-    setGender("");
-    setEmail("");
-    setLasttName("");
-    setFirstName("");
-    setRole("");
-  };
+    editUser(editId, form.getFieldsValue());
 
-  const toggleCheckbox = () => {
-    setAgreement((prev) => (prev = !prev));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(firstName, lastName, email, gender, role);
-    // editId
-    //   ? editUser(editId, { ...fields, agreement })
-    //   : addingUser({ ...fields, agreement });
-
-    editUser(editId, { ...fields, agreement });
-
-    toggleCheckbox();
     onCloseEdit();
-    reset();
   };
-
-  console.log(fields);
 
   return (
     <div>
-      {/* <Form></Form> */}
-
-      <form className={styles.formular} onSubmit={handleSubmit}>
-        <input
-          onChange={handleChange}
+      <Form
+        form={form}
+        controlOptions={{
+          col: {
+            size: 8,
+          },
+        }}
+        labelOptions={{
+          col: {
+            size: 2,
+          },
+        }}
+        type="vertical"
+        onFinish={handleSubmit}
+        className="form"
+      >
+        <Form.Field
+          label="First Name"
           name="firstName"
-          placeholder="First name"
-          type="text"
-          pattern={standard}
-          value={fields.firstName}
-          autoComplete="off"
-        />
-        <input
-          onChange={handleChange}
-          name="lastName"
-          placeholder="Last name"
-          type="text"
-          pattern={standard}
-          value={fields.lastName}
-          autoComplete="off"
-        />
-        <input
-          onChange={handleChange}
-          name="email"
-          placeholder="Email"
-          type="email"
-          value={fields.email}
-          autoComplete="off"
-        />
-
-        <select
-          className={styles.selector}
-          onChange={handleChange}
-          name="gender"
-          value={fields.gender}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
         >
-          <option value="">Gender</option>
-          <option value="Masculin">Masculin</option>
-          <option value="Feminin">Feminin</option>
-          <option value="Ma abtin">Ma abtin</option>
-        </select>
-        <select name="role" onChange={handleChange} value={fields.role}>
-          <option value="">Role</option>
-          <option value="Administrator">Administrator</option>
-          <option value="Moderator">Moderator</option>
-        </select>
-        <label htmlFor="agreement" className={styles.label}>
-          <input
-            name="agreement"
-            type="checkbox"
-            checked={agreement}
-            onChange={toggleCheckbox}
+          <Input size="small" placeholder="FirstName" autoComplete="off" />
+        </Form.Field>
+        <Form.Field
+          label="Last Name"
+          name="lastName"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input size="small" placeholder="Last Name" autoComplete="off" />
+        </Form.Field>
+        <Form.Field
+          label="Email"
+          name="email"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input size="small" placeholder="Email" autoComplete="off" />
+        </Form.Field>
+        <Form.Field
+          label="Gender"
+          name="gender"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            emptyLabel="No found"
+            isClearable
+            mode="single"
+            newPlaceholder="Add new..."
+            optionsMode="dropdown"
+            placeholder="Select"
+            prefix={<Icon type="eye" />}
+            size="large"
+            valueMode="regular"
+          >
+            <Select.Search onSearch={function noRefCheck() {}} value="" />
+            <Select.Options options={genderOptions} />
+            <Select.Pagination
+              count={5}
+              limit={20}
+              page={1}
+              mode="scroll"
+              setPage={function noRefCheck() {}}
+            />
+          </Select>
+        </Form.Field>
+        <Form.Field
+          label="Role"
+          name="role"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select
+            emptyLabel="No found"
+            isClearable
+            mode="single"
+            newPlaceholder="Add new..."
+            optionsMode="dropdown"
+            placeholder="Select"
+            prefix={<Icon type="eye" />}
+            size="large"
+            valueMode="regular"
+          >
+            <Select.Search onSearch={function noRefCheck() {}} value="" />
+            <Select.Options options={roleOptions} />
+            <Select.Pagination
+              count={5}
+              limit={20}
+              page={1}
+              mode="scroll"
+              setPage={function noRefCheck() {}}
+            />
+          </Select>
+        </Form.Field>
+        <Form.Field
+          name="agreement"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Checkbox
+            checkAlign="left"
+            text="I agree with the processing of personal data"
           />
-          <span className={styles.agreement}>
-            I agree with the processing of personal data
-          </span>
-        </label>
-        <button disabled={verifyInputs}>Submit</button>
-      </form>
+        </Form.Field>
+
+        <Button
+          onClick={() => handleSubmit()}
+          buttonClass="ebs-button--medium ebs-button butt"
+          type="ghost"
+        >
+          Submit
+        </Button>
+      </Form>
     </div>
   );
 };

@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import context from "../../../context/app-context";
 import { getPosts } from "../../../services/users";
 import PostItem from "./PostItem";
-// import Modal from "../../Modal/Modal";
 import Warning from "./Warning";
 import { Row, Col, Container, Modal, Button } from "ebs-design";
 import "./PostTest.scss";
@@ -17,7 +16,6 @@ const Posts: React.FC = () => {
 
   const [posts, setPosts] = useState([]);
   const [refreshPosts, setRefreshPosts] = useState(false);
-  // const [modal, setModal] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
   const [warningId, setWarningId] = useState(0);
 
@@ -25,21 +23,9 @@ const Posts: React.FC = () => {
     getPosts().then((res) => setPosts(res));
   }, [refreshPosts]);
 
-  // console.log(posts);
-
   const redirectToFormPage = () => {
     navigate("/create");
   };
-
-  // const redirectToEditPage = (id: number) => {
-  //   navigate("/`/posts/{id}/edit`");
-  // };
-
-  // include modalul t|f, refresh lista
-  // const onClose = () => {
-  //   setModal(!modal); // toggle la modal
-  //   handlePostsList();
-  // };
 
   const handleWarning = () => {
     setWarningModal(!warningModal);
@@ -89,20 +75,13 @@ const Posts: React.FC = () => {
             Add a post
           </Button>
           {warningModal && (
-            // <Modal onClose={handleWarning}>
-            //   <Warning
-            //     onClose={handleWarning}
-            //     warningId={warningId}
-            //     handlePostsList={handlePostsList}
-            //   />
-            // </Modal>
             <Modal
               closeOnClickOutside
               header=""
               mask
               open
               size="small"
-              title="Do rou really want to delete the post?"
+              title="Do rou really want to delete the item?"
               onClose={handleWarning}
               className="modal"
             >

@@ -1,20 +1,20 @@
-import { deletePost } from "../../../services/users";
+import { deleteUser } from "../../../services/users";
 import { Space, Button } from "ebs-design";
 
-interface IWarningModalProps {
+interface IWarningUsersModalProps {
   onClose: () => void;
   warningId: number;
-  handlePostsList: () => void;
+  handleUserList: () => void;
 }
 
-const Warning = ({
+const WarningUsers = ({
   onClose,
+  handleUserList,
   warningId,
-  handlePostsList,
-}: IWarningModalProps) => {
+}: IWarningUsersModalProps) => {
   const confirmDelete = () => {
-    deletePost(warningId);
-    handlePostsList();
+    deleteUser(warningId);
+    handleUserList();
     onClose();
   };
 
@@ -45,4 +45,4 @@ const Warning = ({
   );
 };
 
-export default Warning;
+export default WarningUsers;

@@ -3,11 +3,11 @@ import { Navigate } from "react-router-dom";
 import { getUsers } from "../../../services/users";
 import { useContext } from "react";
 import context from "../../../context/app-context";
-import UserListItem from "./UserListItem";
 import UserAddingForm from "./Form/UserAddingForm";
-import Modal from "../../Modal/Modal";
+import WarningUsers from "./WarningUsers";
 import UserEditForm from "./UserEditForm";
-import { Table, Button, Space } from "ebs-design";
+import { Table, Button, Space, Modal } from "ebs-design";
+import "../Posts/PostTest.scss";
 
 const Users: React.FC = () => {
   const [modalAdd, setModalAdd] = useState(false);
@@ -15,16 +15,13 @@ const Users: React.FC = () => {
   const [usersList, setUsersList] = useState([]);
   const [editId, setEditId] = useState(0);
   const [refreshUserList, setRefreshUserList] = useState(false);
-  // const {
-  //   user: { agreement },
-  // } = useContext(context);
-  const { user } = useContext(context);
+  const [warningModal, setWarningModal] = useState(false);
+  const [warningId, setWarningId] = useState(0);
 
-  // console.log(user);
+  const { user } = useContext(context);
 
   useEffect(() => {
     getUsers().then((res) => setUsersList(res));
-    // console.log("users useEffect");
   }, [refreshUserList]);
 
   // include modalul t|f, refresh lista
@@ -32,9 +29,14 @@ const Users: React.FC = () => {
     setModalAdd(!modalAdd); // toggle la modal
     handleUserList();
   };
+
   const onCloseEdit = () => {
     setModalEdit(!modalEdit);
     handleUserList();
+  };
+
+  const handleWarning = () => {
+    setWarningModal(!warningModal);
   };
 
   // refresh la lista userilor
@@ -47,32 +49,18 @@ const Users: React.FC = () => {
     onClose();
   };
 
+  const handleDeleteUser = (id: number) => {
+    setWarningId(id);
+    handleWarning();
+    handleUserList();
+  };
+
   // primeste id-ul item-ului si ilseteaza in state
   const handleEditUser = (id: number) => {
     console.log("handleEditUser ", id);
     setEditId(id);
     setModalEdit(!modalEdit);
   };
-
-  const showUserList = usersList.map(
-    ({ id, firstName, lastName, email, gender }) => (
-      <UserListItem
-        key={id}
-        id={id}
-        firstName={firstName}
-        lastName={lastName}
-        email={email}
-        gender={gender}
-        handleUserList={handleUserList}
-        handleEditUser={handleEditUser}
-      />
-    )
-  );
-
-  console.log(showUserList);
-
-  const tes = showUserList.map((item) => item.props);
-  console.log(tes);
 
   const userTable = usersList.map(
     ({ id, firstName, lastName, email, gender }) => {
@@ -86,23 +74,61 @@ const Users: React.FC = () => {
       {user.agreement || window.localStorage.length > 0 ? (
         <div>
           {user.role === "Administrator" && (
-            <button onClick={handleAddUserButton}>Add a user</button>
+            <Button
+              type="ghost"
+              size="small"
+              children="Add a user"
+              onClick={handleAddUserButton}
+            />
           )}
           {modalAdd && (
-            <Modal onClose={onClose}>
+            <Modal
+              closeOnClickOutside
+              header=""
+              mask
+              open
+              size="small"
+              className="modal"
+              onClose={onClose}
+            >
               <UserAddingForm onClose={onClose} />
             </Modal>
           )}
           {modalEdit && (
-            <Modal onClose={onCloseEdit}>
+            <Modal
+              closeOnClickOutside
+              header=""
+              mask
+              open
+              size="small"
+              className="modal"
+              onClose={onCloseEdit}
+            >
               <UserEditForm editId={editId} onCloseEdit={onCloseEdit} />
+            </Modal>
+          )}
+          {warningModal && (
+            <Modal
+              closeOnClickOutside
+              header=""
+              mask
+              open
+              size="small"
+              title="Do rou really want to delete the item?"
+              onClose={handleWarning}
+              className="modal"
+            >
+              <WarningUsers
+                onClose={handleWarning}
+                warningId={warningId}
+                handleUserList={handleUserList}
+              />
             </Modal>
           )}
           <Table
             columns={[
               {
                 dataIndex: "id",
-                // onFilter: function noRefCheck(){},
                 title: "ID",
               },
               {
@@ -118,7 +144,6 @@ const Users: React.FC = () => {
                 title: "Gender",
               },
               {
-                // dataIndex: "",
                 title: "Action",
                 render: ({ id }) => (
                   <Space>
@@ -127,85 +152,20 @@ const Users: React.FC = () => {
                       size="small"
                       children="Edit"
                       onClick={() => handleEditUser(id)}
-                      // className={cn("calls__play-button", {
-                      //   active: callItem?.id === item.id,
-                      // })}
-                      // disabled={!item.file}
-                      // onClick={() => handleOpenPlayer(item)}
-                      // prefix={
-                      //   <Icon
-                      //     className="activity-log-item__delete__icon"
-                      //     component={Play}
-                      //   />
-                      // }
                     />
                     <Button
-                      type="ghost"
+                      type="dark"
                       size="small"
                       children="Delete"
-                      // className={cn("calls__play-button", {
-                      //   active: callItem?.id === item.id,
-                      // })}
-                      // disabled={!item.file}
-                      // onClick={() => handleOpenPlayer(item)}
-                      // prefix={
-                      //   <Icon
-                      //     className="activity-log-item__delete__icon"
-                      //     component={Play}
-                      //   />
-                      // }
+                      onClick={() => handleDeleteUser(id)}
                     />
                   </Space>
                 ),
               },
-              // {
-              //   dataIndex: "Edit",
-              //   title: "Edit",
-              // },
-              // {
-              //   dataIndex: "Delete",
-              //   title: "Delete",
-              // },
             ]}
             data={userTable}
-            // data={[
-            //   {
-            //     email: "sarj@mail.com",
-            //     fullName: "Sarah Jones",
-            //     id: "Test",
-            //     gender: "Female",
-            //     action: "Edit Delete",
-            //   },
-            //   {
-            //     date: "Today",
-            //     desc: "Desc",
-            //     title: "Test",
-            //   },
-            //   {
-            //     date: "Today",
-            //     desc: "Desc",
-            //     title: "Test",
-            //   },
-            //   {
-            //     date: "Today",
-            //     desc: "Desc",
-            //     title: "Test",
-            //   },
-            // ]}
             size="medium"
           />
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Full Name</th>
-                <th>Email</th>
-                <th>Gender</th>
-                {user.role === "Administrator" && <th>Action</th>}
-              </tr>
-            </thead>
-            <tbody>{showUserList}</tbody>
-          </table>
         </div>
       ) : (
         <Navigate to="/" />

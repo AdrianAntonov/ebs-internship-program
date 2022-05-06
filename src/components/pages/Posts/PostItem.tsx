@@ -25,8 +25,6 @@ const PostItem: React.FC<IpostItemProps> = ({
   deletePostItem,
 }) => {
   const handleDeletePostItem = (id: number) => {
-    handleWarning();
-
     deletePostItem(id);
   };
 
@@ -57,21 +55,6 @@ const PostItem: React.FC<IpostItemProps> = ({
         size="medium"
         className="buttonsSpace"
       >
-        {/* <Label
-          status="info"
-          text="Edit"
-          type="fill"
-          onClick={() => handleEditPostItem(id)}
-          className="label"
-        ></Label>
-        <Label
-          status="danger"
-          text="Delete"
-          type="fill"
-          onClick={() => handleDeletePostItem(id)}
-          className="label"
-        ></Label>
-        <Button className="butt">Delete</Button> */}
         <Button
           onClick={() => handleEditPostItem(id)}
           buttonClass="ebs-button--medium ebs-button butt"

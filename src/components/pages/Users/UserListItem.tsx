@@ -24,14 +24,12 @@ const UserListItem: React.FC<UserProps> = ({
   const { user } = useContext(context);
 
   const handleDeleteUser = (arg: number) => {
-    console.log(arg);
     deleteUser(arg);
     handleUserList();
   };
 
   const handleEditUserItem = (id: number) => {
     handleEditUser(id);
-    console.log("editUser, edit button");
   };
 
   return (

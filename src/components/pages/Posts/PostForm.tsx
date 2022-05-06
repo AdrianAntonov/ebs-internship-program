@@ -4,7 +4,6 @@ import styles from "./Posts.module.css";
 
 interface IPostAddingProp {
   onClose: () => void;
-  // editId: number;
 }
 const PostForm = ({ onClose }: IPostAddingProp) => {
   const [date] = useState("");
