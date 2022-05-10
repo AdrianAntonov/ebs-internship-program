@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { getUsers } from "../../../services/users";
+import { getUsers, deleteUser } from "../../../services/users";
 import { useContext } from "react";
 import context from "../../../context/app-context";
 import UserAddingForm from "./Form/UserAddingForm";
-import WarningUsers from "./WarningUsers";
+import Warning from "../Warning";
 import UserEditForm from "./UserEditForm";
+import ConfirmModal from "../ConfirmModal";
 import { Table, Button, Space, Modal } from "ebs-design";
 import "../Posts/PostTest.scss";
 
@@ -71,6 +72,8 @@ const Users: React.FC = () => {
 
   return (
     <>
+      {/* <Layout>
+        <Layout.Content> */}
       {user.agreement || window.localStorage.length > 0 ? (
         <div>
           {user.role === "Administrator" && (
@@ -108,22 +111,29 @@ const Users: React.FC = () => {
             </Modal>
           )}
           {warningModal && (
-            <Modal
-              closeOnClickOutside
-              header=""
-              mask
-              open
-              size="small"
-              title="Do rou really want to delete the item?"
+            <ConfirmModal
+              confirmID={warningId}
               onClose={handleWarning}
-              className="modal"
-            >
-              <WarningUsers
-                onClose={handleWarning}
-                warningId={warningId}
-                handleUserList={handleUserList}
-              />
-            </Modal>
+              handleDelete={deleteUser}
+              handleList={handleUserList}
+            ></ConfirmModal>
+            // <Modal
+            //   closeOnClickOutside
+            //   header=""
+            //   mask
+            //   open
+            //   size="small"
+            //   title="Do rou really want to delete the item?"
+            //   onClose={handleWarning}
+            //   className="modal"
+            // >
+            //   <Warning
+            //     warningId={warningId}
+            //     onClose={handleWarning}
+            //     handleDelete={deleteUser}
+            //     handleList={handleUserList}
+            //   />
+            // </Modal>
           )}
           <Table
             columns={[
@@ -170,6 +180,8 @@ const Users: React.FC = () => {
       ) : (
         <Navigate to="/" />
       )}
+      {/* </Layout.Content>
+      </Layout> */}
     </>
   );
 };

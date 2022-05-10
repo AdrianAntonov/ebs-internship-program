@@ -15,7 +15,8 @@
       "gender": "Feminin",
       "role": "Administrator",
       "agreement": true,
-      "id": 15
+      "id": 15,
+      "password": "123321"
     },
     {
       "firstName": "Sammy",
@@ -46,245 +47,24 @@
       "id": 18
     },
     {
-      "firstName": "",
-      "lastName": "",
-      "email": "",
-      "gender": "",
-      "role": "",
-      "agreement": false,
-      "id": 19
-    },
-    {
-      "firstName": "asd",
-      "lastName": "dsa",
-      "email": "s@m.com",
-      "id": 22
-    },
-    {
-      "firstName": "asd",
-      "lastName": "dsa",
-      "email": "s@m.com",
-      "gender": "male",
-      "id": 23
-    },
-    {
-      "firstName": "wewe",
-      "lastName": "frfr",
-      "email": "as@m.com",
-      "gender": "male",
-      "id": 24
-    },
-    {
-      "firstName": "Fortius",
-      "lastName": "Altius",
-      "email": "d@m.c",
-      "gender": "anoaaather",
-      "role": "Moderator",
-      "agreement": true,
-      "id": 25
-    },
-    {
-      "id": 32
-    },
-    {
-      "id": 33
-    },
-    {
-      "firstName": "qwe",
-      "lastName": "ewq",
-      "id": 34
-    },
-    {
-      "id": 35
-    },
-    {
-      "firstName": "ert",
-      "lastName": "tre",
-      "id": 36
-    },
-    {
-      "id": 37
-    },
-    {
-      "firstName": "asd",
-      "lastName": "dsa",
-      "id": 38
-    },
-    {
-      "id": 39
-    },
-    {
-      "id": 40
-    },
-    {
-      "firstName": "kkk",
-      "lastName": "lll",
-      "email": "i@m.c",
-      "gender": "Male",
-      "id": 41
-    },
-    {
-      "firstName": "asddsa",
-      "id": 42
-    },
-    {
-      "firstName": "",
-      "id": 43
-    },
-    {
-      "id": 45
-    },
-    {
-      "firstName": "oioi",
-      "lastName": "ioio",
-      "email": "i@mail.com",
-      "gender": "Male",
-      "id": 46
-    },
-    {
-      "firstName": "asdfggt",
-      "id": 47
-    },
-    {
-      "firstName": "ewweq",
-      "id": 48
-    },
-    {
-      "firstName": "asdf",
-      "id": 49
-    },
-    {
-      "firstName": "qaw",
-      "lastName": "waq",
-      "id": 50
-    },
-    {
-      "firstName": "sese",
-      "lastName": "dede",
-      "id": 51
-    },
-    {
-      "lastName": "asdf",
-      "id": 52
-    },
-    {
-      "firstName": "fafa",
-      "lastName": "gaga",
-      "id": 53
-    },
-    {
-      "firstName": "kase",
-      "lastName": "lope",
-      "email": "lop@.mail.com",
-      "id": 54
-    },
-    {
-      "gender": "Male",
-      "id": 55
-    },
-    {
-      "email": "w@m",
-      "gender": "Male",
-      "id": 56
-    },
-    {
-      "firstName": "kiku",
-      "lastName": "miku",
-      "email": "m@m",
-      "gender": "Male",
-      "id": 57
-    },
-    {
-      "firstName": "lolo",
-      "lastName": "molo",
-      "email": "m@m",
-      "gender": "Female",
-      "id": 58
-    },
-    {
-      "firstName": "ziuzia",
-      "lastName": "cuzea",
-      "email": "z@m",
-      "gender": "Elf",
-      "id": 59
-    },
-    {
-      "firstName": "asdsad",
-      "lastName": "dsadasd",
-      "email": "dsadas",
-      "gender": "Another",
-      "id": 60
-    },
-    {
-      "firstName": "q",
-      "lastName": "q",
-      "email": "q",
-      "gender": "Male",
-      "id": 61
-    },
-    {
-      "firstName": "z",
-      "lastName": "z",
-      "email": "z",
-      "gender": "Female",
-      "id": 62
-    },
-    {
-      "firstName": "q",
-      "lastName": "w",
-      "email": "d",
-      "gender": "Ork",
-      "id": 63
-    },
-    {
-      "firstName": "r",
-      "lastName": "r",
-      "email": "r",
-      "gender": "Elf",
-      "id": 64
-    },
-    {
-      "firstName": "u",
-      "lastName": "u",
-      "email": "u",
-      "gender": "Troll",
-      "id": 65
-    },
-    {
-      "firstName": "biba",
-      "lastName": "boba",
-      "email": "v",
-      "gender": "Male",
-      "role": "Administrator",
-      "agreement": true,
-      "id": 66
-    },
-    {
-      "firstName": "q",
-      "lastName": "w",
-      "email": "e",
+      "firstName": "Indy",
+      "lastName": "Jones",
+      "email": "ij@m.com",
       "gender": "Male",
       "role": "Administrator",
       "agreement": true,
       "id": 67
     },
     {
-      "firstName": "a",
-      "lastName": "q",
-      "email": "q",
+      "firstName": "Zigmundas",
+      "lastName": "vracic",
+      "email": "asd",
+      "password": "wer",
+      "confirmation": "wer",
       "gender": "Male",
-      "role": "Moderator",
+      "role": "Administrator",
       "agreement": true,
       "id": 68
-    },
-    {
-      "firstName": "asd",
-      "lastName": "dsa",
-      "email": "dsa",
-      "gender": "Male",
-      "role": "Moderator",
-      "agreement": true,
-      "id": 69
     }
   ],
   "posts": [
@@ -378,6 +158,20 @@
       "link": "smundicusGrundicus",
       "date": "2022-05-06 00:00",
       "id": 24
+    },
+    {
+      "title": "Zigmund",
+      "area": "aler mertus defaitus",
+      "link": "sskdfjdklsdfkj",
+      "date": "2022-05-10 08:00",
+      "id": 25
+    },
+    {
+      "title": "karabas",
+      "area": "krokus defus",
+      "link": "qwqwqw",
+      "date": "2022-05-10 08:30",
+      "id": 26
     }
   ],
   "profile": {

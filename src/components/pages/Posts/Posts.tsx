@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import context from "../../../context/app-context";
-import { getPosts } from "../../../services/users";
+import { getPosts, deletePost } from "../../../services/users";
+
 import PostItem from "./PostItem";
-import Warning from "./Warning";
+import Warning from "../Warning";
 import { Row, Col, Container, Modal, Button } from "ebs-design";
 import "./PostTest.scss";
 
@@ -86,9 +87,10 @@ const Posts: React.FC = () => {
               className="modal"
             >
               <Warning
-                onClose={handleWarning}
                 warningId={warningId}
-                handlePostsList={handlePostsList}
+                onClose={handleWarning}
+                handleDelete={deletePost}
+                handleList={handlePostsList}
               />
             </Modal>
           )}

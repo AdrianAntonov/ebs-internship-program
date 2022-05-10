@@ -1,12 +1,6 @@
-.navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .AppLink {
   text-decoration: none;
-  display: inline-block;
+  display: block;
   padding: 10px;
   font-size: 1.5rem;
   color: #232323;
@@ -18,7 +12,6 @@
   composes: AppLink;
   color: #008000;
   text-shadow: none;
-  /* font-weight: 500; */
 }
 
 .AppLink:hover {
@@ -28,4 +21,14 @@
 
 .AppActive:hover {
   color: #008000;
+}
+
+.links {
+  display: inline-block;
+  padding-left: 0.5rem;
+}
+
+.iconText {
+  display: flex;
+  align-items: baseline;
 }

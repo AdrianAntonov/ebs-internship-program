@@ -1,8 +1,8 @@
-.navigation {
+/* .navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
+} */
 .link {
   text-decoration: none;
   display: inline-block;

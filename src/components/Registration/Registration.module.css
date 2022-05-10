@@ -1,9 +1,5 @@
-.formular {
+/* .formular {
   width: 320px;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
   margin-top: 20px;
 }
 
@@ -25,4 +21,14 @@ input,
 button,
 .selector {
   margin: 5px 0;
+} */
+.ebs-button--medium.ebs-button.butt {
+  width: 85px;
+  height: 25px;
+  padding: 0;
+  margin: 0;
+}
+.modal {
+  text-align: center;
+  color: rgb(197, 37, 9);
 }

@@ -72,7 +72,6 @@ const UserEditForm = ({ onCloseEdit, editId }: UserAddingProp) => {
         }}
         type="vertical"
         onFinish={handleSubmit}
-        className="form"
       >
         <Form.Field
           label="First Name"

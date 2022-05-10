@@ -1,51 +1,37 @@
-import styles from "./Login.module.css";
 import { checkUser } from "../../services/users";
 import { Navigate, useNavigate } from "react-router-dom";
-import Modal from "../Modal/Modal";
-import { useContext, useState, ChangeEvent } from "react";
+import { useContext, useState } from "react";
 import context from "../../context/app-context";
+import { Form, Input, Button, Modal, useForm } from "ebs-design";
 
 const Login: React.FC = () => {
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
   const [modal, setModal] = useState(true);
-  const { user, setUser } = useContext(context);
-  console.log(user);
+  const { setUser } = useContext(context);
+  // console.log(user);
+
+  const [form] = useForm();
 
   const navigate = useNavigate();
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-
-    const { name, value } = e.target;
-
-    switch (name) {
-      case "email":
-        setEmail(value);
-        break;
-      case "password":
-        setPassword(value);
-        break;
-    }
-  };
-
-  const reset = () => {
-    setEmail("");
-    setPassword("");
-  };
 
   const onClose = () => {
     setModal(!modal);
   };
 
-  const logUser = (e: any) => {
-    e.preventDefault();
-    // console.log("logUser");
+  const logUser = () => {
+    const [email, password] = [
+      form.getFieldValue("email"),
+      form.getFieldValue("password"),
+    ];
+    const check = email && password;
 
     checkUser(email, password).then((res) => {
+      if (!check) {
+        alert("Fill all fields!");
+        return;
+      }
+
       if (res.length === 0) {
         alert("Sign up, please!");
-        reset();
         navigate("/");
         return;
       }
@@ -54,35 +40,76 @@ const Login: React.FC = () => {
 
       setUser(res[0]);
       onClose();
-      reset();
     });
   };
   return (
     <>
       {modal ? (
-        <Modal onClose={onClose}>
-          <form className={styles.formular}>
-            <h3>Log In</h3>
-            <input
-              onChange={handleChange}
+        <Modal
+          closeOnClickOutside
+          header=""
+          mask
+          open
+          size="small"
+          title="Log In"
+          className="modal"
+          onClose={onClose}
+        >
+          <Form
+            form={form}
+            controlOptions={{
+              col: {
+                size: 8,
+              },
+            }}
+            labelOptions={{
+              col: {
+                size: 2,
+              },
+            }}
+            type="vertical"
+            onFinish={logUser}
+          >
+            <Form.Field
+              label="Email"
               name="email"
-              placeholder="Email"
-              type="email"
-              value={email}
-              autoComplete="off"
-            />
-            <input
-              onChange={handleChange}
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input
+                size="small"
+                placeholder="Email"
+                autoComplete="off"
+                type="email"
+              />
+            </Form.Field>
+            <Form.Field
+              label="Password"
               name="password"
-              placeholder="Password"
-              type="password"
-              value={password}
-              autoComplete="off"
-            />
-            <button onClick={logUser} disabled={!email || !password}>
-              Log in
-            </button>
-          </form>
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <Input
+                size="small"
+                placeholder="Password"
+                autoComplete="off"
+                type="password"
+              />
+            </Form.Field>
+            <Button
+              onClick={logUser}
+              buttonClass="ebs-button--medium ebs-button butt"
+              type="ghost"
+            >
+              Submit
+            </Button>
+          </Form>
         </Modal>
       ) : (
         <Navigate to="/" />

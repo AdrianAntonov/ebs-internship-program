@@ -1,9 +1,9 @@
-.navigation {
+/* .navigation {
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #adc8ff;
-}
+} */
 
 /* .link {
   text-decoration: none;
@@ -26,3 +26,7 @@
 .active:hover {
   color: #978b6f;
 } */
+
+.navigation {
+  padding-right: 15px;
+}

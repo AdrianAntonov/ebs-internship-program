@@ -1,20 +1,21 @@
-import { deleteUser } from "../../../services/users";
 import { Space, Button } from "ebs-design";
 
 interface IWarningUsersModalProps {
   onClose: () => void;
   warningId: number;
-  handleUserList: () => void;
+  handleList: () => void;
+  handleDelete: (id: number) => void;
 }
 
 const WarningUsers = ({
   onClose,
-  handleUserList,
   warningId,
+  handleList,
+  handleDelete,
 }: IWarningUsersModalProps) => {
   const confirmDelete = () => {
-    deleteUser(warningId);
-    handleUserList();
+    handleDelete(warningId);
+    handleList();
     onClose();
   };
 
