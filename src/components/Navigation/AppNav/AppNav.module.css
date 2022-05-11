@@ -1,0 +1,34 @@
+.AppLink {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #232323;
+  font-weight: 400;
+  text-shadow: -1px 1px 1px hsla(0, 2%, 71%, 0.8);
+}
+
+.AppActive {
+  composes: AppLink;
+  color: #008000;
+  text-shadow: none;
+}
+
+.AppLink:hover {
+  color: #0d7d7d;
+  text-shadow: none;
+}
+
+.AppActive:hover {
+  color: #008000;
+}
+
+.links {
+  display: inline-block;
+  padding-left: 0.5rem;
+}
+
+.iconText {
+  display: flex;
+  align-items: baseline;
+}

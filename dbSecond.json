@@ -1,0 +1,180 @@
+{
+  "users": [
+    {
+      "firstName": "Josh",
+      "lastName": "Crow",
+      "email": "jocrow@mail.com",
+      "agreement": true,
+      "gender": "Masculin",
+      "id": 1
+    },
+    {
+      "firstName": "Sarah",
+      "lastName": "Jones",
+      "email": "sarj@mail.com",
+      "gender": "Feminin",
+      "role": "Administrator",
+      "agreement": true,
+      "id": 15,
+      "password": "123321"
+    },
+    {
+      "firstName": "Sammy",
+      "lastName": "Brown",
+      "email": "sam@mail.com",
+      "gender": "Feminin",
+      "role": "Moderator",
+      "agreement": true,
+      "id": 16
+    },
+    {
+      "firstName": "Jimmy",
+      "lastName": "Bale",
+      "email": "jiom@mail.com",
+      "password": "123321",
+      "agreement": true,
+      "gender": "Masculin",
+      "role": "Administrator",
+      "id": 17
+    },
+    {
+      "firstName": "Mick",
+      "lastName": "Jager",
+      "email": "jag@mail.com",
+      "gender": "Masculin",
+      "role": "Administrator",
+      "agreement": true,
+      "id": 18
+    },
+    {
+      "firstName": "Indy",
+      "lastName": "Jones",
+      "email": "ij@m.com",
+      "gender": "Male",
+      "role": "Administrator",
+      "agreement": true,
+      "id": 67
+    },
+    {
+      "firstName": "Zigmundas",
+      "lastName": "vracic",
+      "email": "asd",
+      "password": "wer",
+      "confirmation": "wer",
+      "gender": "Male",
+      "role": "Administrator",
+      "agreement": true,
+      "id": 68
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "some comment ",
+      "area": "Every time you eat, Colgate is watching you",
+      "link": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1586227740560-8cf2732c1531",
+      "date": "2022-04-29"
+    },
+    {
+      "title": "Chunga-Changa",
+      "area": "The Best place in the world!!! ",
+      "link": "https://s3.us-west-2.amazonaws.com/images.unsplash.com/small/photo-1586227740560-8cf2732c1531",
+      "date": "2022-05-07 10:30",
+      "id": 2
+    },
+    {
+      "title": "My Post",
+      "area": "I'd like to say Hello World!",
+      "link": "www.gidonline.io",
+      "date": "2022-05-06 18:00",
+      "id": 3
+    },
+    {
+      "title": "Another post",
+      "area": "Don't worry, Be Happy!",
+      "link": "www.gidonline.io",
+      "date": "2022-05-06 19:30",
+      "id": 4
+    },
+    {
+      "title": "hongildon",
+      "area": "ddddddd",
+      "link": "ascdasd",
+      "date": "2022-04-22",
+      "id": 7
+    },
+    {
+      "title": "voievoda",
+      "area": "fdureka",
+      "link": "rolot",
+      "date": "2022-04-27",
+      "id": 9
+    },
+    {
+      "title": "last",
+      "area": "postert ghj",
+      "link": "here uiuiui",
+      "date": "2022-04-26",
+      "id": 14
+    },
+    {
+      "title": "Control",
+      "area": "ncdcjnjskc",
+      "link": "wwwrererwr",
+      "date": "2022-05-07 10:30",
+      "id": 17
+    },
+    {
+      "title": "another",
+      "area": "bhrwbflhfbwelhfbwlfhbwlhfrblhrwbfkewfewklfnewklfnewkjfnewklfwklafbawlrhgbwrgiawhfiwahfiurhgirereaiegrrgwirgugei",
+      "link": "https://stackoverflow.com/questions/44488357/equal-height-rows-in-css-grid-layout",
+      "date": "2022-04-30",
+      "id": 18
+    },
+    {
+      "title": "Barbeque",
+      "area": "Was delicious!",
+      "link": "www.BBQ.com",
+      "date": "2022-05-26",
+      "id": 20
+    },
+    {
+      "title": "Uagadudu",
+      "area": "MambaDumbaSimba",
+      "link": "www.yahoo.com",
+      "date": "2022-05-05 11:00",
+      "id": 21
+    },
+    {
+      "title": "Mr. Smith",
+      "area": "Contestation",
+      "link": "www.const.com",
+      "date": "2022-05-05 16:00",
+      "id": 23
+    },
+    {
+      "title": "Grundic",
+      "area": "Smundic",
+      "link": "smundicusGrundicus",
+      "date": "2022-05-06 00:00",
+      "id": 24
+    },
+    {
+      "title": "Zigmund",
+      "area": "aler mertus defaitus",
+      "link": "sskdfjdklsdfkj",
+      "date": "2022-05-10 08:00",
+      "id": 25
+    },
+    {
+      "title": "karabas",
+      "area": "krokus defus",
+      "link": "qwqwqw",
+      "date": "2022-05-10 08:30",
+      "id": 26
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
