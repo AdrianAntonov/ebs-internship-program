@@ -4,9 +4,11 @@ import { getUsers, deleteUser } from "../../../services/users";
 import { useContext } from "react";
 import context from "../../../context/app-context";
 import UserAddingForm from "./Form/UserAddingForm";
-import Warning from "../Warning";
+// import Warning from "../Warning";
 import UserEditForm from "./UserEditForm";
-import ConfirmModal from "../ConfirmModal";
+import ConfirmModal from "./ConfirmModal/ConfirmModal";
+import ConfirmModalContent from "./ConfirmModal/ConfirmModalContent";
+import ConfirmModalHeader from "./ConfirmModal/ConfirmModalHeader";
 import { Table, Button, Space, Modal } from "ebs-design";
 import "../Posts/PostTest.scss";
 
@@ -63,6 +65,20 @@ const Users: React.FC = () => {
     setModalEdit(!modalEdit);
   };
 
+  const modalHeader = (
+    <div>
+      <h3>WARNING!</h3>
+    </div>
+  );
+
+  const modalContent = (
+    <div>
+      <h3>You are going to DELETE an item!</h3>
+      <hr />
+      <h4>ARE YOU SURE?</h4>
+    </div>
+  );
+
   const userTable = usersList.map(
     ({ id, firstName, lastName, email, gender }) => {
       const name = `${firstName} ${lastName}`;
@@ -72,8 +88,6 @@ const Users: React.FC = () => {
 
   return (
     <>
-      {/* <Layout>
-        <Layout.Content> */}
       {user.agreement || window.localStorage.length > 0 ? (
         <div>
           {user.role === "Administrator" && (
@@ -113,10 +127,14 @@ const Users: React.FC = () => {
           {warningModal && (
             <ConfirmModal
               confirmID={warningId}
+              cancellation="Cancel"
+              acceptance="Delete"
+              header={ConfirmModalHeader(modalHeader)}
+              content={ConfirmModalContent(modalContent)}
               onClose={handleWarning}
               handleDelete={deleteUser}
               handleList={handleUserList}
-            ></ConfirmModal>
+            />
             // <Modal
             //   closeOnClickOutside
             //   header=""
@@ -180,8 +198,6 @@ const Users: React.FC = () => {
       ) : (
         <Navigate to="/" />
       )}
-      {/* </Layout.Content>
-      </Layout> */}
     </>
   );
 };

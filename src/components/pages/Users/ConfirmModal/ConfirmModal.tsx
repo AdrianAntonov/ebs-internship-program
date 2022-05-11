@@ -2,6 +2,10 @@ import { Space, Button, Modal } from "ebs-design";
 
 interface IConfirmModalProps {
   confirmID: number;
+  cancellation: string;
+  acceptance: string;
+  header?: React.ReactNode;
+  content?: React.ReactNode;
   onClose: () => void;
   handleDelete: (id: number) => void;
   handleList: () => void;
@@ -10,6 +14,10 @@ interface IConfirmModalProps {
 export const ConfirmModal: React.FC<IConfirmModalProps> = ({
   confirmID,
   onClose,
+  header,
+  content,
+  cancellation,
+  acceptance,
   handleDelete,
   handleList,
 }) => {
@@ -23,18 +31,21 @@ export const ConfirmModal: React.FC<IConfirmModalProps> = ({
   };
   return (
     <div>
-      {/* ConfirmModal */}
-      <Modal closeOnClickOutside header="" mask open size="small">
-        <Modal.Content>Are you sure?</Modal.Content>
+      <Modal
+        closeOnClickOutside
+        header={header || <h4>Warning! Achtung!</h4>}
+        mask
+        open
+        size="small"
+      >
+        <Modal.Content>{content || <h4>Are you sure!</h4>}</Modal.Content>
         <Modal.Footer>
           <Space justify="space-between">
-            {/* <Button onClick={handleCancel}>{t("buttons.cancel")}</Button>
-            <Button type="primary" onClick={handleSuccess}>
-              {t("buttons.yes")}
-            </Button> */}
-            <Button onClick={handleCancel}>Cancel</Button>
-            <Button type="primary" onClick={handleSuccess}>
-              Delete
+            <Button type="primary" onClick={handleCancel}>
+              {cancellation}
+            </Button>
+            <Button type="dark" onClick={handleSuccess}>
+              {acceptance}
             </Button>
           </Space>
         </Modal.Footer>
