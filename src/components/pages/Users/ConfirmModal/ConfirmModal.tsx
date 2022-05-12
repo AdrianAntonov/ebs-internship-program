@@ -1,4 +1,5 @@
 import { Space, Button, Modal } from "ebs-design";
+import { useMutateOnDeleteUsersList } from "../../../../hooks/useData";
 
 interface IConfirmModalProps {
   confirmID: number;
@@ -7,8 +8,6 @@ interface IConfirmModalProps {
   header?: React.ReactNode;
   content?: React.ReactNode;
   onClose: () => void;
-  handleDelete: (id: number) => void;
-  handleList: () => void;
 }
 
 export const ConfirmModal: React.FC<IConfirmModalProps> = ({
@@ -18,16 +17,14 @@ export const ConfirmModal: React.FC<IConfirmModalProps> = ({
   content,
   cancellation,
   acceptance,
-  handleDelete,
-  handleList,
 }) => {
+  const { mutate } = useMutateOnDeleteUsersList();
   const handleCancel = (): void => {
     onClose();
   };
   const handleSuccess = (): void => {
-    handleDelete(confirmID);
     onClose();
-    handleList();
+    mutate(confirmID);
   };
   return (
     <div>

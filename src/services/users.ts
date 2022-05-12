@@ -1,3 +1,4 @@
+// import { useQuery } from "react-query";
 import axios from "axios";
 import { IaddingUser, IaddPost } from "../type.d/route";
 // const KEY = "mG1lAJOyXhDVeAJwLP7UMfzuWbGksCCZkrr2SH4f0PU";
@@ -6,13 +7,17 @@ import { IaddingUser, IaddPost } from "../type.d/route";
 axios.defaults.baseURL = "http://localhost:3001";
 
 export const getUsers = async () => {
-  //axios.get(`${BASE_URL}/posts`).then((response) => console.log(response));
   const { data } = await axios.get("/users");
   return data;
 };
 
+// export const queryUsers = () => {
+//   const results = useQuery("users", () => {
+//     return axios.get("/users");
+//   });
+// };
+
 export const getPosts = async () => {
-  //axios.get(`${BASE_URL}/posts`).then((response) => console.log(response));
   const { data } = await axios.get("/posts");
   return data;
 };
@@ -84,7 +89,7 @@ export const editPost = async (id: number | string, cred: {}) => {
 // };
 
 const fetching = {
-  getUsers,
+  // getUsers,
   addingUser,
   deleteUser,
   getUserByID,

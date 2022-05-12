@@ -1,5 +1,4 @@
-// import { useState, ChangeEvent } from "react";
-import { addingUser } from "../../../../services/users";
+import { useMutateUsersList } from "../../../../hooks/useData";
 import "../../Posts/PostTest.scss";
 import {
   Form,
@@ -18,6 +17,8 @@ interface UserAddingProp {
 const UserAddingForm = ({ onClose }: UserAddingProp) => {
   const [form] = useForm();
 
+  const { mutate } = useMutateUsersList();
+
   const handleSubmitUser = () => {
     const check =
       form.getFieldValue("firstName") &&
@@ -32,8 +33,7 @@ const UserAddingForm = ({ onClose }: UserAddingProp) => {
       alert("Fill all fields!");
       return;
     }
-
-    addingUser(form.getFieldsValue());
+    mutate(form.getFieldsValue());
     onClose();
   };
 

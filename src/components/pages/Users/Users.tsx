@@ -1,6 +1,13 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { getUsers, deleteUser } from "../../../services/users";
+// import { useQuery, useQueryClient } from "react-query";
+import axios from "axios";
+import {
+  useUsersData,
+  // useMutateOnDeleteUsersList,
+} from "../../../hooks/useData";
+// import { getUsers, deleteUser } from "../../../services/users";
+import { deleteUser } from "../../../services/users";
 import { useContext } from "react";
 import context from "../../../context/app-context";
 import UserAddingForm from "./Form/UserAddingForm";
@@ -12,30 +19,75 @@ import ConfirmModalHeader from "./ConfirmModal/ConfirmModalHeader";
 import { Table, Button, Space, Modal } from "ebs-design";
 import "../Posts/PostTest.scss";
 
+axios.defaults.baseURL = "http://localhost:3001";
+
+interface IUsersList {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  gender: string;
+}
+
 const Users: React.FC = () => {
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
-  const [usersList, setUsersList] = useState([]);
+  // const [usersList, setUsersList] = useState([]);
   const [editId, setEditId] = useState(0);
-  const [refreshUserList, setRefreshUserList] = useState(false);
+  // const [refreshUserList, setRefreshUserList] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
   const [warningId, setWarningId] = useState(0);
 
   const { user } = useContext(context);
 
-  useEffect(() => {
-    getUsers().then((res) => setUsersList(res));
-  }, [refreshUserList]);
+  // useEffect(() => {
+  //   getUsers().then((res) => setUsersList(res));
+  // }, [refreshUserList]);
+
+  //////////////////// PENTRU A FACE IDENTIC LUCRUL useEFFECTULUI CU DEPENDANCIES ARRAY ////////////////
+
+  //                                    **    useQuery mutation  **
+  //                                    **    invalidate cache   **
+
+  // const queryClient = useQueryClient();
+  // const { mutate } = useMutateOnDeleteUsersList();
+  // console.log(mutate);
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  const onSuccess = (data: []) => {
+    console.log("SUCCESS!!!", data);
+  };
+  const onError = (error: string) => {
+    console.log("ERROR!!!", error);
+  };
+
+  const { data } = useUsersData(onSuccess, onError);
+
+  // const { data } = useQuery("users", getUsers, {
+  //   onSuccess,
+  //   onError,
+  // });
+  // const { isLoading: isLoadingUsers, data: dataUsers } = useQuery(
+  //   ["users", id],
+  //   () => getPosts({ id: user.id })
+  // );
+  // console.log(data);
+  // const resultList = data?.data;
+
+  // console.log(resultList);
 
   // include modalul t|f, refresh lista
   const onClose = () => {
     setModalAdd(!modalAdd); // toggle la modal
-    handleUserList();
+    // queryClient.invalidateQueries("users");
+
+    // handleUserList();
+    // refetch();
   };
 
   const onCloseEdit = () => {
     setModalEdit(!modalEdit);
-    handleUserList();
+    // handleUserList();
   };
 
   const handleWarning = () => {
@@ -43,9 +95,11 @@ const Users: React.FC = () => {
   };
 
   // refresh la lista userilor
-  const handleUserList = () => {
-    setRefreshUserList(!refreshUserList);
-  };
+  // const handleUserList = () => {
+  //   // setRefreshUserList(!refreshUserList);
+  //   // queryClient.invalidateQueries("users");
+  //   // refetch();
+  // };
 
   // pentru click pe butonul Submit la AddingForm
   const handleAddUserButton = () => {
@@ -55,7 +109,8 @@ const Users: React.FC = () => {
   const handleDeleteUser = (id: number) => {
     setWarningId(id);
     handleWarning();
-    handleUserList();
+    // mutate(id);
+    // handleUserList();
   };
 
   // primeste id-ul item-ului si ilseteaza in state
@@ -79,8 +134,22 @@ const Users: React.FC = () => {
     </div>
   );
 
-  const userTable = usersList.map(
-    ({ id, firstName, lastName, email, gender }) => {
+  // const userTable = usersList.map(
+  //   ({ id, firstName, lastName, email, gender }) => {
+  //     const name = `${firstName} ${lastName}`;
+  //     return { id, name, email, gender };
+  //   }
+  // );
+
+  // const userTable = resultList?.map((item: IUsersList<string | number>) => {
+  //   const { id, firstName, lastName, email, gender } = item;
+
+  //   const name = `${firstName} ${lastName}`;
+  //   return { id, name, email, gender };
+  // });
+
+  const userTable = data?.map(
+    ({ id, firstName, lastName, email, gender }: IUsersList) => {
       const name = `${firstName} ${lastName}`;
       return { id, name, email, gender };
     }
@@ -132,8 +201,8 @@ const Users: React.FC = () => {
               header={ConfirmModalHeader(modalHeader)}
               content={ConfirmModalContent(modalContent)}
               onClose={handleWarning}
-              handleDelete={deleteUser}
-              handleList={handleUserList}
+              // handleDelete={deleteUser}
+              // handleList={handleUserList}
             />
             // <Modal
             //   closeOnClickOutside

@@ -2,10 +2,12 @@ import { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import context from "../../../context/app-context";
 import { getPosts, deletePost } from "../../../services/users";
-
+import ConfirmModal from "../Users/ConfirmModal/ConfirmModal";
+import ConfirmModalHeader from "../Users/ConfirmModal/ConfirmModalHeader";
+import ConfirmModalContent from "../Users/ConfirmModal/ConfirmModalContent";
 import PostItem from "./PostItem";
-import Warning from "../Warning";
-import { Row, Col, Container, Modal, Button } from "ebs-design";
+// import Warning from "../Warning";
+import { Row, Col, Container, Button } from "ebs-design";
 import "./PostTest.scss";
 
 const Posts: React.FC = () => {
@@ -48,6 +50,20 @@ const Posts: React.FC = () => {
     navigate(`/posts/${id}/edit`);
   };
 
+  const modalHeader = (
+    <div>
+      <h3>WARNING!</h3>
+    </div>
+  );
+
+  const modalContent = (
+    <div>
+      <h3>You are going to DELETE a post!</h3>
+      <hr />
+      <h4>Are you sure?</h4>
+    </div>
+  );
+
   const postList = posts.map(({ id, title, area, link, date }) => (
     <Col size={3} key={id}>
       <PostItem
@@ -76,23 +92,31 @@ const Posts: React.FC = () => {
             Add a post
           </Button>
           {warningModal && (
-            <Modal
-              closeOnClickOutside
-              header=""
-              mask
-              open
-              size="small"
-              title="Do rou really want to delete the item?"
+            <ConfirmModal
+              confirmID={warningId}
+              cancellation="Cancel"
+              acceptance="Delete"
+              header={ConfirmModalHeader(modalHeader)}
+              content={ConfirmModalContent(modalContent)}
               onClose={handleWarning}
-              className="modal"
-            >
-              <Warning
-                warningId={warningId}
-                onClose={handleWarning}
-                handleDelete={deletePost}
-                handleList={handlePostsList}
-              />
-            </Modal>
+            />
+            // <Modal
+            //   closeOnClickOutside
+            //   header=""
+            //   mask
+            //   open
+            //   size="small"
+            //   title="Do rou really want to delete the item?"
+            //   onClose={handleWarning}
+            //   className="modal"
+            // >
+            //   <Warning
+            //     warningId={warningId}
+            //     onClose={handleWarning}
+            //     handleDelete={deletePost}
+            //     handleList={handlePostsList}
+            //   />
+            // </Modal>
           )}
           {posts && (
             <Container>

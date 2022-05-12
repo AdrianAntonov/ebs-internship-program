@@ -1,5 +1,8 @@
 // import React from "react";
 import { routes } from "./utils/routes";
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Container from "./components/Container/Container";
 import AppNav from "./components/Navigation/AppNav/AppNav";
@@ -18,40 +21,45 @@ import "ebs-design/dist/styles/index.scss";
 //   <Route key={item.name} path={item.path} element={element} />
 // ));
 // console.log(routing);
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <div className="App">
       <AppProvider>
-        <BrowserRouter>
-          <Container>
-            <Layout>
-              <Layout.Topbar.RightSide>
-                <NavBar />
-              </Layout.Topbar.RightSide>
-              <Sidebar>
-                <AppNav />
-              </Sidebar>
-              <Layout.Content>
-                <Routes>
-                  {routes.map(({ Element, ...item }) => (
-                    <Route
-                      key={item.name}
-                      path={item.path}
-                      element={<Element />}
-                    />
-                  ))}
-                  {/* <Route path="/registration" element={<Registration />}></Route>
+        <QueryClientProvider client={queryClient}>
+          <BrowserRouter>
+            <Container>
+              <Layout>
+                <Layout.Topbar.RightSide>
+                  <NavBar />
+                </Layout.Topbar.RightSide>
+                <Sidebar>
+                  <AppNav />
+                </Sidebar>
+                <Layout.Content>
+                  <Routes>
+                    {routes.map(({ Element, ...item }) => (
+                      <Route
+                        key={item.name}
+                        path={item.path}
+                        element={<Element />}
+                      />
+                    ))}
+                    {/* <Route path="/registration" element={<Registration />}></Route>
                   <Route path="/login" element={<Login />}></Route>
                   <Route path="/" element={<HomePage />}></Route>
                   <Route path="/users" element={<Users />}></Route>
                   <Route path="/posts" element={<Posts />}></Route>
                 <Route path="/dashboard" element={<Dashboard />}></Route> */}
-                </Routes>
-              </Layout.Content>
-              {/* <UserAddingForm /> */}
-            </Layout>
-          </Container>
-        </BrowserRouter>
+                  </Routes>
+                </Layout.Content>
+                {/* <UserAddingForm /> */}
+              </Layout>
+            </Container>
+          </BrowserRouter>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </QueryClientProvider>
       </AppProvider>
     </div>
   );
