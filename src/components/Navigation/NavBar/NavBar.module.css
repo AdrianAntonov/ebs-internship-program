@@ -1,0 +1,32 @@
+/* .navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #adc8ff;
+} */
+
+/* .link {
+  text-decoration: none;
+  display: inline-block;
+  padding: 10px;
+  font-size: 1.5rem;
+  color: #36332c;
+  font-weight: 600;
+}
+
+.active {
+  composes: link;
+  color: #978b6f;
+}
+
+.link:hover {
+  color: #36332c;
+}
+
+.active:hover {
+  color: #978b6f;
+} */
+
+.navigation {
+  padding-right: 15px;
+}
