@@ -1,4 +1,6 @@
-import { useMutateUsersList } from "../../../../hooks/useData";
+// import { useMutateUsersList } from "../../../../hooks/useData";
+import { useUniversalListMutation } from "../../../../hooks/useData";
+import { addingUser } from "../../../../services/users";
 import "../../Posts/PostTest.scss";
 import {
   Form,
@@ -17,7 +19,9 @@ interface UserAddingProp {
 const UserAddingForm = ({ onClose }: UserAddingProp) => {
   const [form] = useForm();
 
-  const { mutate } = useMutateUsersList();
+  // const { mutate } = useMutateUsersList();
+
+  const { mutate } = useUniversalListMutation(addingUser);
 
   const handleSubmitUser = () => {
     const check =

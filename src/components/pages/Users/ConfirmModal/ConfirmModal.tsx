@@ -1,7 +1,9 @@
 import { Space, Button, Modal } from "ebs-design";
-import { useMutateOnDeleteUsersList } from "../../../../hooks/useData";
+import { useUniversalListMutation } from "../../../../hooks/useData";
+import { deleteUser, deletePost } from "../../../../services/users";
 
 interface IConfirmModalProps {
+  info: string;
   confirmID: number;
   cancellation: string;
   acceptance: string;
@@ -17,14 +19,24 @@ export const ConfirmModal: React.FC<IConfirmModalProps> = ({
   content,
   cancellation,
   acceptance,
+  info,
 }) => {
-  const { mutate } = useMutateOnDeleteUsersList();
+  const { mutate } = useUniversalListMutation(deleteUser);
+
+  const { mutate: deletePostItem } = useUniversalListMutation(deletePost);
+
   const handleCancel = (): void => {
     onClose();
   };
   const handleSuccess = (): void => {
+    if (info === "users") {
+      mutate(confirmID);
+    }
+    if (info === "posts") {
+      deletePostItem(confirmID);
+    }
+
     onClose();
-    mutate(confirmID);
   };
   return (
     <div>

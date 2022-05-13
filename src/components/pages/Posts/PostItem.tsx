@@ -1,5 +1,3 @@
-// import { useState } from "react";
-// import Modal from "../../Modal/Modal";
 import { Card, Space, Button } from "ebs-design";
 import "./PostTest.scss";
 

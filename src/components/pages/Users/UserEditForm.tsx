@@ -1,5 +1,8 @@
-import { useEffect } from "react";
-import { editUser, getUserByID } from "../../../services/users";
+import { editUser } from "../../../services/users";
+import {
+  useUniversalEditMutation,
+  useGetUserById,
+} from "../../../hooks/useData";
 import "../Posts/PostTest.scss";
 import {
   Form,
@@ -19,12 +22,11 @@ interface UserAddingProp {
 const UserEditForm = ({ onCloseEdit, editId }: UserAddingProp) => {
   const [form] = useForm();
 
-  useEffect(() => {
-    console.log(editId);
-    getUserByID(editId).then((res) => {
-      form.setFieldsValue({ ...res, agreement: false });
-    });
-  }, [editId, form]);
+  const { data } = useGetUserById(editId);
+  // console.log(data);
+  form.setFieldsValue({ ...data, agreement: false });
+
+  const { mutate } = useUniversalEditMutation(editUser);
 
   const genderOptions = [
     { text: "Male", value: "Male" },
@@ -50,8 +52,7 @@ const UserEditForm = ({ onCloseEdit, editId }: UserAddingProp) => {
       alert("Fill all fields!");
       return;
     }
-
-    editUser(editId, form.getFieldsValue());
+    mutate({ id: editId, cred: form.getFieldsValue() });
 
     onCloseEdit();
   };

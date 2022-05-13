@@ -1,6 +1,9 @@
-import { useEffect } from "react";
 import { useNavigate, Navigate, useParams } from "react-router-dom";
-import { getPostByID, editPost } from "../../../services/users";
+import {
+  useGetPostById,
+  useUniversalEditMutation,
+} from "../../../hooks/useData";
+import { editPost } from "../../../services/users";
 import { useContext } from "react";
 import context from "../../../context/app-context";
 import { Form, Input, Textarea, DatePicker, Button, useForm } from "ebs-design";
@@ -14,15 +17,15 @@ const PostEdit = () => {
 
   const [form] = useForm();
 
-  useEffect(() => {
-    if (id) {
-      getPostByID(id).then((res) => form.setFieldsValue(res));
-    }
-  }, [id, form]);
+  const { data } = useGetPostById(Number(id));
+
+  const { mutate } = useUniversalEditMutation(editPost);
+
+  form.setFieldsValue(data);
 
   const handleSubmitPost = () => {
     if (id) {
-      editPost(id, form.getFieldsValue());
+      mutate({ id: Number(id), cred: form.getFieldsValue() });
 
       navigate("/posts");
     }

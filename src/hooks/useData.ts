@@ -1,13 +1,10 @@
-// import React from "react";
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import { addingUser, getUsers, deleteUser } from "../services/users";
-
-// export function useUsersData(onSuccess: () => void, onError: () => void) {
-//   return useQuery("users", getUsers, {
-//     onSuccess,
-//     onError,
-//   });
-// }
+import {
+  getPosts,
+  getUsers,
+  getUserByID,
+  getPostByID,
+} from "../services/users";
 
 export const useUsersData = (
   onSuccess: (data: []) => void,
@@ -19,30 +16,40 @@ export const useUsersData = (
   });
 };
 
-// const mutate = useMutation();
+export const useGetUserById = (id: number) => {
+  return useQuery(["getUser", id], () => getUserByID(id));
+};
 
-export const useMutateUsersList = () => {
-  const queryClient = useQueryClient();
+export const useGetPostById = (id: number) => {
+  return useQuery(["getPost", id], () => getPostByID(id));
+};
 
-  return useMutation(addingUser, {
-    onSuccess: () => queryClient.invalidateQueries("users"),
+export const usePostsData = (
+  onSuccess: (data: []) => void,
+  onError: (error: string) => void
+) => {
+  return useQuery("posts", getPosts, {
+    onSuccess,
+    onError,
   });
 };
 
-export const useMutateOnDeleteUsersList = () => {
+type Choose = "users" | "posts";
+
+export const useUniversalListMutation = (func: (arg?: any) => Promise<any>) => {
   const queryClient = useQueryClient();
 
-  return useMutation(deleteUser, {
-    onSuccess: () => queryClient.invalidateQueries("users"),
+  return useMutation(func, {
+    onSuccess: (list: Choose) => queryClient.invalidateQueries(list),
   });
 };
 
-//////////////// DE CE ASA NU MEREGE ??? //////////////////////
+export const useUniversalEditMutation = (
+  func: (arg: { id: number; cred: {} }) => Promise<any>
+) => {
+  const queryClient = useQueryClient();
 
-// export const useMutateOnDeleteUsersList = (arg) => {
-//   const queryClient = useQueryClient();
-
-//   return useMutation(deleteUser, {
-//     onSuccess: () => queryClient.invalidateQueries("users"),
-//   });
-// };
+  return useMutation(func, {
+    onSuccess: () => queryClient.invalidateQueries(),
+  });
+};

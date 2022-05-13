@@ -1,12 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import context from "../../../context/app-context";
-import { getPosts, deletePost } from "../../../services/users";
+import { usePostsData } from "../../../hooks/useData";
 import ConfirmModal from "../Users/ConfirmModal/ConfirmModal";
 import ConfirmModalHeader from "../Users/ConfirmModal/ConfirmModalHeader";
 import ConfirmModalContent from "../Users/ConfirmModal/ConfirmModalContent";
 import PostItem from "./PostItem";
-// import Warning from "../Warning";
 import { Row, Col, Container, Button } from "ebs-design";
 import "./PostTest.scss";
 
@@ -17,14 +16,18 @@ const Posts: React.FC = () => {
 
   const navigate = useNavigate();
 
-  const [posts, setPosts] = useState([]);
-  const [refreshPosts, setRefreshPosts] = useState(false);
   const [warningModal, setWarningModal] = useState(false);
   const [warningId, setWarningId] = useState(0);
 
-  useEffect(() => {
-    getPosts().then((res) => setPosts(res));
-  }, [refreshPosts]);
+  const onSuccess = (data: []) => {
+    console.log("SUCCESS!!!", data);
+  };
+  const onError = (error: string) => {
+    console.log("ERROR!!!", error);
+  };
+
+  const { data } = usePostsData(onSuccess, onError);
+  console.log(data);
 
   const redirectToFormPage = () => {
     navigate("/create");
@@ -33,16 +36,10 @@ const Posts: React.FC = () => {
   const handleWarning = () => {
     setWarningModal(!warningModal);
   };
-  // refresh la lista userilor
-
-  const handlePostsList = () => {
-    setRefreshPosts(!refreshPosts);
-  };
 
   const deletePostItem = (id: number) => {
     setWarningId(id);
     handleWarning();
-    handlePostsList();
   };
 
   // primeste id-ul item-ului si il seteaza in state
@@ -64,7 +61,7 @@ const Posts: React.FC = () => {
     </div>
   );
 
-  const postList = posts.map(({ id, title, area, link, date }) => (
+  const postList = data?.map(({ id, title, area, link, date }) => (
     <Col size={3} key={id}>
       <PostItem
         key={id}
@@ -93,6 +90,7 @@ const Posts: React.FC = () => {
           </Button>
           {warningModal && (
             <ConfirmModal
+              info="posts"
               confirmID={warningId}
               cancellation="Cancel"
               acceptance="Delete"
@@ -100,25 +98,8 @@ const Posts: React.FC = () => {
               content={ConfirmModalContent(modalContent)}
               onClose={handleWarning}
             />
-            // <Modal
-            //   closeOnClickOutside
-            //   header=""
-            //   mask
-            //   open
-            //   size="small"
-            //   title="Do rou really want to delete the item?"
-            //   onClose={handleWarning}
-            //   className="modal"
-            // >
-            //   <Warning
-            //     warningId={warningId}
-            //     onClose={handleWarning}
-            //     handleDelete={deletePost}
-            //     handleList={handlePostsList}
-            //   />
-            // </Modal>
           )}
-          {posts && (
+          {data && (
             <Container>
               <Row>{postList}</Row>
             </Container>

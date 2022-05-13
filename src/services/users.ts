@@ -11,12 +11,6 @@ export const getUsers = async () => {
   return data;
 };
 
-// export const queryUsers = () => {
-//   const results = useQuery("users", () => {
-//     return axios.get("/users");
-//   });
-// };
-
 export const getPosts = async () => {
   const { data } = await axios.get("/posts");
   return data;
@@ -67,14 +61,18 @@ export const getPostByID = async (id: number | string) => {
   return data;
 };
 
-export const editUser = async (id: number, cred: {}) => {
+interface Iobj {
+  id: number;
+  cred: {};
+}
+export const editUser = async ({ id, cred }: Iobj) => {
   const { data } = await axios.put(`/users/${id}`, cred);
   console.log("editUser");
   return data;
 };
 
 ////////// CE TIP TREBUIE SA FIE PENTRU id ?
-export const editPost = async (id: number | string, cred: {}) => {
+export const editPost = async ({ id, cred }: Iobj) => {
   const { data } = await axios.put(`/posts/${id}`, cred);
   console.log("editPost");
   return data;

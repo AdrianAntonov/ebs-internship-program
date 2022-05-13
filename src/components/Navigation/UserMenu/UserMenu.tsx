@@ -7,7 +7,7 @@ const UserMenu: React.FC = () => {
   const { user, setUser } = useContext(context);
 
   const logoutUser = () => {
-    window.localStorage.removeItem("userID");
+    window.localStorage.clear();
     setUser({
       firstName: "",
       lastName: "",
@@ -20,8 +20,12 @@ const UserMenu: React.FC = () => {
   return (
     <div className={styles.userMenu}>
       <span className={styles.name}>{user.firstName}</span>
-          
-      <Button buttonClass="ebs-button--medium ebs-button butt" type="dark" onClick={logoutUser}>
+
+      <Button
+        buttonClass="ebs-button--medium ebs-button butt"
+        type="dark"
+        onClick={logoutUser}
+      >
         Log out
       </Button>
     </div>
